@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Object successfully created"
+      flash[:success] = "User successfully created"
       redirect_to users_url
     else
       flash[:error] = "Something went wrong"
