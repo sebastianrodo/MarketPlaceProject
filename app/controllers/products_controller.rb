@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @products = Product.all
   end
@@ -8,7 +10,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params)
+    @product = current_user.products.new(product_params)
     if @product.save
       flash[:success] = "Product successfully created"
       redirect_to products_url
