@@ -11,6 +11,7 @@
           <th scope="col">CellPhone</th>
           <th scope="col">Address</th>
           <th scope="col">Show</th>
+          <th scope="col">Delete</th>
           <!--<th scope="col">Delete</th>-->
         </tr>
       </thead>
@@ -31,11 +32,18 @@
                                           </a>
                   </button>
               </td>
+              <td><center><button type="button" class="btn btn-danger">
+                <%= link_to "Delete",
+                    user,
+                    method: :delete,
+                    style:"color:white; text-decoration:none;" %>
+              </button></center>
+             </td>
              </tr>
           <%end%>
       </tbody>
     </table>
-    <%=  link_to '<button type="button" class="btn btn-primary col" >Create User</button>'.html_safe, "users/new" %>
+    <%=  link_to '<button type="button" class="btn btn-primary col" >Create User</button>'.html_safe, "users/sign_up" %>
 
   </div>
 </div>

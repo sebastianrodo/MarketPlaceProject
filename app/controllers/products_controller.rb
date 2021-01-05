@@ -26,7 +26,6 @@ class ProductsController < ApplicationController
     redirect_to products_url
   end
 
-
   def product_params
     params.require(:product).permit(:name, :description, :quantity, :price)
   end
