@@ -10,6 +10,7 @@
           <th scope="col">Email</th>
           <th scope="col">CellPhone</th>
           <th scope="col">Address</th>
+          <th scope="col">Show</th>
           <!--<th scope="col">Delete</th>-->
         </tr>
       </thead>
@@ -23,6 +24,13 @@
               <td><%= user.email %></td>
               <td><%= user.cellphone %></td>
               <td><%= user.address %></td>
+              <td><button type="button"
+                    class="btn btn-success" ><a href="/users/<%= user.id%>"
+                                            style="color: white;
+                                                  text-decoration: none;">Show
+                                          </a>
+                  </button>
+              </td>
              </tr>
           <%end%>
       </tbody>
