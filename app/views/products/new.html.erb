@@ -21,6 +21,12 @@
           <label for="inputPassword4">Product price</label>
           <%= product.text_field :price, class:"form-control", placeholder:"Product price" %>
         </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Categories</label>
+            <% Category.all.each do |category| %>
+              <%= check_box_tag "category", category.id %> <%= category.name %>
+            <%end%>
+        </div>
       </div>
       <%= product.submit "Save", class:"btn btn-primary"%>
     <%end%>
