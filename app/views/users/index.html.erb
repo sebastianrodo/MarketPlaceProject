@@ -12,7 +12,7 @@
           <th scope="col">Address</th>
           <th scope="col">Show</th>
           <th scope="col">Delete</th>
-          <!--<th scope="col">Delete</th>-->
+          <th scope="col">Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -25,20 +25,30 @@
               <td><%= user.email %></td>
               <td><%= user.cellphone %></td>
               <td><%= user.address %></td>
-              <td><button type="button"
-                    class="btn btn-success" ><a href="/users/<%= user.id%>"
-                                            style="color: white;
-                                                  text-decoration: none;">Show
-                                          </a>
-                  </button>
+              <td>
+                <button type="button"class="btn btn-success" >
+                  <%=  link_to 'Edit', "users/#{user.id}",
+                        style:"color:white; text-decoration:none;" %>
+                </button>
               </td>
-              <td><center><button type="button" class="btn btn-danger">
-                <%= link_to "Delete",
-                    user,
-                    method: :delete,
-                    style:"color:white; text-decoration:none;" %>
-              </button></center>
+              <td>
+                <center>
+                  <button type="button" class="btn btn-danger">
+                    <%= link_to "Delete",
+                        user,
+                        method: :delete,
+                        style:"color:white; text-decoration:none;" %>
+                  </button>
+                </center>
              </td>
+             <td>
+              <center>
+                <button type="button" class="btn btn-primary">
+                  <%=  link_to 'Edit', "users/#{user.id}/edit",
+                        style:"color:white; text-decoration:none;" %>
+                </button>
+              </center>
+           </td>
              </tr>
           <%end%>
       </tbody>

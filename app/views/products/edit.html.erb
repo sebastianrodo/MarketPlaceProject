@@ -1,34 +1,34 @@
-<div class="top-space">
-  <div class="container">
-    <h1 class="text-center be-light-blue">CREATE PRODUCT</h1>
+<div class="top-space bottom-space">
+  <div class="container" style="
+              border: 3px solid #007bff;
+              border-radius: 7px;
+              box-shadow: 3px 5px 15px grey;">
+    <h1 class="text-center be-light-blue top-space-xs">EDIT PRODUCT</h1>
     <%= form_for(@product) do |product| %>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Product Name</label>
-          <%= product.text_field :name, class:"form-control", placeholder:"Product Name" %>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputPassword4">Product description</label>
-          <%= product.text_field :description, class:"form-control", placeholder:"Product description" %>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Product quantity</label>
-          <%= product.text_field :quantity, class:"form-control", placeholder:"Product quantity" %>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputPassword4">Product price</label>
-          <%= product.text_field :price, class:"form-control", placeholder:"Product price" %>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputPassword4">Categories</label>
-            <% Category.all.each do |category| %>
-              <%= check_box_tag "category", category.id %> <%= category.name %>
-            <%end%>
+      <div class="form-group col-md">
+        <label for="inputEmail4"><b>Product Name</b></label>
+        <%= product.text_field :name, class:"form-control", placeholder:"Product Name" %>
+        <label for="inputPassword4" class="top-space"><b>Product description</b></label>
+        <%= product.text_area :description, class:"form-control", placeholder:"Product description" %>
+
+        <div class="form-row top-space">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4"><b>Product quantity</b></label>
+            <%= product.text_field :quantity, class:"form-control", placeholder:"Product quantity" %>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4"><b>Product price</b></label>
+            <%= product.text_field :price, class:"form-control", placeholder:"Product price" %>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4"><b>Categories</b></label>
+              <% Category.all.each do |category| %>
+              <br><%= check_box_tag "category", category.id %> <%= category.name %>
+              <%end%>
+          </div>
         </div>
       </div>
       <%= product.submit "Save", class:"btn btn-primary"%>
-    <%end%>
+    <%end%><br>
   </div>
 </div>
