@@ -18,6 +18,10 @@
                   product,
                   method: :delete,
                   style:"color:white; text-decoration:none;" %>
+            </button></center><br>
+            <center><button type="button" class="btn btn-success">
+              <%=  link_to 'Edit', "products/#{product.id}/edit",
+                    style:"color:white; text-decoration:none;" %>
             </button></center>
           </div>
           <div class="card-footer">
@@ -30,4 +34,4 @@
     <br><%=  link_to '<button type="button" class="btn btn-primary col" >Create Product</button>'.html_safe,
              "products/new" %>
   </div>
-</div>
+</div><br>
