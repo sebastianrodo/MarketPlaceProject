@@ -1,7 +1,7 @@
 <div class="top-space">
   <div class="container">
-    <h1 class="text-center be-light-blue">USERS</h1>
-    <table class="table">
+    <h1 class="be-white">USERS</h1>
+    <table class="table" style="box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15)">
       <thead class="thead-light">
         <tr>
           <th scope="col">#</th>
@@ -18,7 +18,7 @@
       <tbody>
 
           <% @users.each do |user| %>
-            <tr>
+            <tr class="table-light">
               <th scope="row"><%= user.id %></th>
               <td><%= user.first_name %></td>
               <td><%= user.last_name %></td>
@@ -53,7 +53,11 @@
           <%end%>
       </tbody>
     </table>
-    <%=  link_to '<button type="button" class="btn col" style="background-color:#3282b8; color:white;" >Create User</button>'.html_safe, "users/sign_up" %>
+    <%=  link_to '<button type="button"
+                          class="btn col be-white"
+                          style="background-color:#6572b8;" >Create User
+                  </button>'.html_safe, "users/sign_up"
+    %>
 
   </div>
 </div>

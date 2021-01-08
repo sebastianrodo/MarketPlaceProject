@@ -1,37 +1,53 @@
 <div class="top-space">
   <div class="container">
-    <h1 class="text-center be-light-blue">PRODUCTS</h1><br>
-    <div class="card-deck">
+    <h1 class="be-white">PRODUCTS</h1><br>
+    <div  class="card-deck"
+          data-aos="zoom-out"
+          data-aos-duration="1000">
       <% @products.each do |product| %>
-        <div class="card">
+        <div class="card shadow">
           <img class="card-img-top" src="https://i.blogs.es/2f4737/realme-6/1366_2000.jpg"
                 alt="Card image cap">
           <div class="card-body">
             <h3 class="card-title"><%= product.name %></h3>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-fluid">
               <li class="list-group-item">Description: <%= product.description %></li>
               <li class="list-group-item">Quantity: <%= product.quantity %></li>
               <li class="list-group-item">Price: $<%= product.price %></li>
-            </ul>
-            <center><button type="button" class="btn btn-danger">
-              <%= link_to "Delete",
-                  product,
-                  method: :delete,
-                  style:"color:white; text-decoration:none;" %>
-            </button></center><br>
-            <center><button type="button" class="btn btn-success">
-              <%=  link_to 'Edit', "products/#{product.id}/edit",
-                    style:"color:white; text-decoration:none;" %>
-            </button></center>
+            </ul><br>
+
           </div>
           <div class="card-footer">
-            <small class="text-muted">-------</small>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <center>
+                    <button type="button" class="btn btn-danger">
+                      <%= link_to "Delete",
+                          product,
+                          method: :delete,
+                          style:"color:white; text-decoration:none;" %>
+                    </button>
+                  </center>
+                </div>
+                <div class="col">
+                  <center>
+                    <button type="button" class="btn btn-success">
+                      <%=  link_to 'Edit', "products/#{product.id}/edit",
+                            style:"color:white; text-decoration:none;" %>
+                    </button>
+                  </center>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       <%end%>
-    </div>
-    <%= link_to "Cerrar session", destroy_user_session_path, method: :delete %>
-    <br><%=  link_to '<button type="button" class="btn btn-primary col" >Create Product</button>'.html_safe,
-             "products/new" %>
+    </div><br>
+    <%=  link_to '<button type="button"
+                          class="btn col be-white color-secondary-bg shadow">Create Product
+                  </button>'.html_safe,
+          "products/new" %>
+    <%= will_paginate @products %>
   </div>
 </div><br>

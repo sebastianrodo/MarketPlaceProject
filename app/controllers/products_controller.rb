@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   #before_action :set_product, only: [:update]
 
   def index
-    @products = Product.all
+    @products = Product.all.paginate(page: params[:page], per_page: 3)
   end
 
   def new

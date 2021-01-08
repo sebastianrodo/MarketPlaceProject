@@ -7,9 +7,11 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   </head>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav  class="navbar navbar-expand-lg navbar-dark shadow color-primary-bg"
+          style="z-index: 1;">
       <a class="navbar-brand" href="#">MARKETPLACE</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -47,8 +49,17 @@
       </div>
     </nav>
   </header>
+  <body>
+    <div  class="color-primary-bg"
+          style=" width: 100%; height: 250px; position: absolute; z-index: -99;">
+
+    </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>
