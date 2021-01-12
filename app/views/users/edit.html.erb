@@ -1,6 +1,9 @@
 <div class="top-space">
-  <div class="container">
-    <h1 class="text-center be-light-blue">EDIT USER</h1>
+  <div  class="container shadow background-white"
+        style="width: 1200px;
+                  height: 100%;
+                  border-radius: 5px;">
+    <h1 class="text-center color-secondary">EDIT USER</h1>
     <%= form_for(@user) do |user| %>
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -26,7 +29,7 @@
         <label for="inputAddress">Address</label>
         <%= user.text_field :address, class:"form-control", placeholder:"Address" %>
       </div>
-      <%= user.submit "Save", class:"btn btn-primary"%>
-    <%end%>
+      <%= user.submit "Save", class:"btn color-secondary-bg be-white"%>
+    <%end%><br>
   </div>
 </div>

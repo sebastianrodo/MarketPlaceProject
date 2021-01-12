@@ -62,6 +62,14 @@
   color: #6572b8;
 }
 
+.be-success-green{
+  color: #28a745;
+}
+
+.be-yellow{
+  color: #FFC107;
+}
+
 .color-primary-bg{
   background-color: #8c99e0;
 }
@@ -72,4 +80,13 @@
 
 .shadow{
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
+}
+.card-img-top{
+  transition: transform .2s;
+}
+
+.card-img-top:hover{
+  transform: scale(1.1);
+  border-radius: 10px;
+  z-index: 100;
 }

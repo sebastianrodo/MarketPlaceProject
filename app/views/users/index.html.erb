@@ -27,7 +27,7 @@
               <td><%= user.address %></td>
               <td>
                 <button type="button"class="btn btn-success" >
-                  <%=  link_to 'Edit', "users/#{user.id}",
+                  <%=  link_to 'View', "users/#{user.id}",
                         style:"color:white; text-decoration:none;" %>
                 </button>
               </td>
@@ -53,11 +53,5 @@
           <%end%>
       </tbody>
     </table>
-    <%=  link_to '<button type="button"
-                          class="btn col be-white"
-                          style="background-color:#6572b8;" >Create User
-                  </button>'.html_safe, "users/sign_up"
-    %>
-
   </div>
 </div>

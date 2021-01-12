@@ -20,7 +20,15 @@
           <div class="card-footer">
             <div class="container-fluid">
               <div class="row">
-                <div class="col">
+                <div class="col-sm">
+                  <center>
+                    <button type="button" class="btn btn-success">
+                      <%= link_to 'View', "products/#{product.id}",
+                          style:"color:white; text-decoration:none;" %>
+                    </button>
+                  </center>
+                </div>
+                <div class="col-sm">
                   <center>
                     <button type="button" class="btn btn-danger">
                       <%= link_to "Delete",
@@ -30,9 +38,9 @@
                     </button>
                   </center>
                 </div>
-                <div class="col">
+                <div class="col-sm">
                   <center>
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-primary">
                       <%=  link_to 'Edit', "products/#{product.id}/edit",
                             style:"color:white; text-decoration:none;" %>
                     </button>
