@@ -1,9 +1,6 @@
 <div class="top-space bottom-space">
-  <div class="container" style="
-              border: 3px solid #007bff;
-              border-radius: 7px;
-              box-shadow: 3px 5px 15px grey;">
-    <h1 class="text-center be-light-blue top-space-xs">EDIT PRODUCT</h1>
+  <div class="container shadow background-white" style="border-radius: 7px;">
+    <h1 class="text-center color-secondary top-space-xs">EDIT PRODUCT</h1>
     <%= form_for(@product) do |product| %>
       <div class="form-group col-md">
         <label for="inputEmail4"><b>Product Name</b></label>
@@ -28,7 +25,7 @@
           </div>
         </div>
       </div>
-      <%= product.submit "Save", class:"btn btn-primary"%>
+      <%= product.submit "Save", class:"btn be-white color-secondary-bg"%>
     <%end%><br>
   </div>
 </div>

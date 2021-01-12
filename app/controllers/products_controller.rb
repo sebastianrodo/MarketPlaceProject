@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  #before_action :set_product, only: [:update]
+  before_action :set_product, only: [:edit, :show, :destroy, :update, :archive]
 
   def index
-    @products = Product.all.paginate(page: params[:page], per_page: 3)
+    @products = Product.all.paginate(page: params[:page], per_page: 3).published
   end
 
   def new
@@ -12,7 +12,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def create
@@ -26,23 +25,34 @@ class ProductsController < ApplicationController
       render 'new'
     end
   end
+
   def show
-    @product = Product.find(params[:id])
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_url
   end
 
   def update
-    @product = Product.find(params[:id])
-    if @product.update(product_params)
-      redirect_to products_url
+    if valid_user!
+      @product.update(product_params)
+
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
+        format.json { head :no_content }
+      end
     else
-      redirect_to products_url
+      respond_to do |format|
+        format.html { redirect_to products_url,
+                      notice: 'It was not updated, you are not the owner of this product.' }
+        #format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
+  end
+
+  def archive
+    @product.archived!
   end
 
   private

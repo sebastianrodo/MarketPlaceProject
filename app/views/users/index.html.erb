@@ -26,27 +26,26 @@
               <td><%= user.cellphone %></td>
               <td><%= user.address %></td>
               <td>
-                <button type="button"class="btn btn-success" >
-                  <%=  link_to 'View', "users/#{user.id}",
-                        style:"color:white; text-decoration:none;" %>
-                </button>
+                <%= link_to '<button type="button"
+                            class="btn btn-success">View
+                                    </button>'.html_safe,
+                    "users/#{user.id}" %>
               </td>
               <td>
                 <center>
-                  <button type="button" class="btn btn-danger">
-                    <%= link_to "Delete",
-                        user,
-                        method: :delete,
-                        style:"color:white; text-decoration:none;" %>
-                  </button>
+                  <%= link_to '<button type="button"
+                            class="btn btn-danger">Delete
+                                    </button>'.html_safe,
+                      user,
+                      method: :delete %>
                 </center>
              </td>
              <td>
               <center>
-                <button type="button" class="btn btn-primary">
-                  <%=  link_to 'Edit', "users/#{user.id}/edit",
-                        style:"color:white; text-decoration:none;" %>
-                </button>
+                <%= link_to '<button type="button"
+                            class="btn btn-primary">Edit
+                                    </button>'.html_safe,
+                    "users/#{user.id}/edit" %>
               </center>
            </td>
              </tr>
