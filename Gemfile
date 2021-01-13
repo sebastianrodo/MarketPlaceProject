@@ -36,6 +36,10 @@ gem 'pg'
 gem 'will_paginate', '~> 3.1.0'
 #aos animation
 gem 'aos', '~> 0.1.0'
+#cocoon
+gem "cocoon"
+#paperclip
+gem "paperclip"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

@@ -1,9 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_product, only: [:edit, :show, :destroy, :update, :archive]
 
   def index
     @products = Product.all.paginate(page: params[:page], per_page: 3).published
+    @img = Image.all
   end
 
   def new
@@ -27,6 +28,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @images = Image.where(product_id: params[:id])
   end
 
   def destroy
@@ -58,7 +60,12 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :quantity, :price, :category)
+    params.require(:product).permit(:name,
+                                    :description,
+                                    :quantity,
+                                    :price,
+                                    :category,
+                                    images_attributes: [:id, :image, :_destroy])
   end
 
   def set_product
