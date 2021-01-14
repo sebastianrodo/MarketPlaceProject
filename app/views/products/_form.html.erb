@@ -17,10 +17,12 @@
       </div>
       <div class="form-group col-md-6">
         <label for="inputPassword4"><b>Categories</b></label>
-          <% Category.all.each do |category| %>
-          <br><%= check_box_tag "category", category.id %> <%= category.name %>
-          <%end%>
+        <% category_array = Category.all.map { |category| [category.name, category.id] } %>
+        <%= product.select(:category_id, options_for_select(category_array),
+                            { },
+                            { :class => 'form-control' }) %>
       </div>
+
       <div class="form-group col-md-6">
         <label for="inputPassword4"><b>Upload the product images</b></label>
         <%= product.fields_for :images do |image| %>

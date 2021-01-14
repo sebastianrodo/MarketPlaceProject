@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user, only: [:edit, :show, :destroy, :update, :archive]
 
   def index
     @users = User.all
@@ -10,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def create
@@ -25,21 +25,27 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to users_url
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to users_url
+    if @user.id === current_user.id
+      @user.update(user_params)
+
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      end
     else
-      redirect_to users_url
+      respond_to do |format|
+        format.html { redirect_to users_url,
+                      notice: 'It was not updated, you are not this user.' }
+        #format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -47,5 +53,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :cellphone, :address)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
