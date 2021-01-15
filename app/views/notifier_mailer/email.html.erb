@@ -1,0 +1,18 @@
+<h1 class="top-space"> Hi <%= @user.email %> a new product has been uploaded :D</h1>
+<h1 class="top-space"><%= @product.name %></h1>
+
+<div class="col-4">
+  <label class="top-space be-red">Price</label>
+  <h4 class="be-success-green">$ <%= @product.price %></h4>
+
+  <label class="top-space be-red">Quantity</label>
+  <h5><%= @product.quantity %></h5>
+
+  <label class="top-space be-red">Description</label>
+  <h5><%= @product.description %></h5>
+</div>
+
+<h3>
+  <%= link_to "Click here to see the complete product in our website", product_url(@product) %>
+</h3>
+

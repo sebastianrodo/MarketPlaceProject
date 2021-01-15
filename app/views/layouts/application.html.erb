@@ -36,15 +36,20 @@
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <% unless user_signed_in? %>
               <li class="nav-item">
-                <%= link_to "Iniciar sesión", new_user_session_path, class:"nav-item nav-link" %>
+                <%= link_to "Sign In", new_user_session_path, class:"nav-item nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Crear cuenta", new_user_registration_path, class:"nav-item nav-link" %>
+                <%= link_to "Create account", new_user_registration_path, class:"nav-item nav-link" %>
               </li>
             <%end%>
             <% if user_signed_in? %>
               <li class="nav-item">
-                <%= link_to "Cerrar session",
+                <%= link_to "My Products",
+                    my_products_path,
+                    class:"nav-item nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Log out",
                     destroy_user_session_path,
                     method: :delete,
                     class:"nav-item nav-link" %>

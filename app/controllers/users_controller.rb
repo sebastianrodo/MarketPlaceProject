@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:edit, :show, :destroy, :update, :archive]
+  before_action :set_user, except: [:index, :new, :create]
 
   def index
     @users = User.all
@@ -28,12 +28,23 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_url
+    if valid_account_owner!
+      @user.destroy
+
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to users_url,
+                      notice: 'The account you want to delete does not belong to you' }
+      end
+    end
   end
 
   def update
-    if @user.id === current_user.id
+    if valid_account_owner!
       @user.update(user_params)
 
       respond_to do |format|

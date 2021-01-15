@@ -11,7 +11,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:email, :password, :current_password, :first_name, :last_name, :cellphone, :address)}
   end
 
-  def valid_user!
+  def valid_product_owner!
     @product.user_id === current_user.id
+  end
+
+  def valid_account_owner!
+    @user.id === current_user.id
   end
 end
