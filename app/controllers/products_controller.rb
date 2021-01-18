@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  respond_to :html, :json, :js
   before_action :set_product, except: [:index, :new, :create, :my_products]
 
   def index
@@ -17,14 +18,17 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.new(product_params)
-    #@product.to_yml
     if @product.save
-
-      flash[:success] = "Product successfully created"
-      redirect_to products_url
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: 'Product was successfully saved.' }
+        format.json { head :no_content }
+      end
     else
-      flash[:error] = "Something went wrong"
-      render 'new'
+      respond_to do |format|
+        flash.now[:alert] = 'You have to complete all of inputs.'
+        format.html { render :new}
+        format.json { render json: @products.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -39,18 +43,19 @@ class ProductsController < ApplicationController
 
   def update
     if valid_product_owner!
-      @product.update(product_params)
-      #NotifierMailer.with(product: @product).email.deliver_later
-      respond_to do |format|
-        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
-        format.json { head :no_content }
+      if @product.update(product_params)
+        respond_to do |format|
+          format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { render :edit }
+          format.json { render json: @products.errors, status: :unprocessable_entity }
+        end
       end
     else
-      respond_to do |format|
-        format.html { redirect_to products_url,
-                      notice: 'It was not updated, you are not the owner of this product.' }
-        #format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+      flash.now[:alert] = 'It was not updated, you are not the owner of this product.'
     end
   end
 
@@ -64,7 +69,7 @@ class ProductsController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to products_url,
-                      notice: 'It was not deleted, you are not the owner of this product.' }
+                      alert: 'It was not deleted, you are not the owner of this product.' }
       end
     end
   end

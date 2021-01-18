@@ -1,3 +1,10 @@
+<% if @product.errors.any? %>
+  <% @product.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger" role="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
 <div class="top-space bottom-space">
   <div class="container shadow background-white" style="border-radius: 7px;">
     <%= render "form", name: "EDIT" %>

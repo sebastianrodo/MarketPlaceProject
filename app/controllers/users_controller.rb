@@ -16,11 +16,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "User successfully created"
-      redirect_to users_url
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: 'User was successfully created.' }
+        format.json { head :no_content }
+      end
     else
-      flash[:error] = "Something went wrong"
-      render 'new'
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: @users.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -38,24 +42,28 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to users_url,
-                      notice: 'The account you want to delete does not belong to you' }
+                      alert: 'The account you want to delete does not belong to you' }
       end
     end
   end
 
   def update
     if valid_account_owner!
-      @user.update(user_params)
-
-      respond_to do |format|
-        format.html { redirect_to users_url, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
+      if @user.update(user_params)
+        respond_to do |format|
+          format.html { redirect_to users_url, notice: 'User was successfully updated.' }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { render :edit }
+          format.json { render json: @users.errors, status: :unprocessable_entity }
+        end
       end
     else
       respond_to do |format|
-        format.html { redirect_to users_url,
-                      notice: 'It was not updated, you are not this user.' }
-        #format.json { render json: @product.errors, status: :unprocessable_entity }
+        flash.now[:alert] = 'It was not updated, you are not this user.'
+        format.html { render :edit }
       end
     end
   end

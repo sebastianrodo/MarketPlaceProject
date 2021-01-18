@@ -42,7 +42,8 @@
                             class="btn btn-danger">Delete
                                     </button>'.html_safe,
                                     "/products/#{product.id}/archive",
-                                    method: :put%>
+                                    method: :put,
+                                    remote: true%>
                     </center>
                   </div>
                   <% end %>
@@ -51,7 +52,7 @@
                       <%= link_to '<button type="button"
                             class="btn btn-primary">Edit
                                     </button>'.html_safe,
-                          "products/#{product.id}/edit" %>
+                          edit_product_path(product) %>
                     </center>
                   </div>
                   <% unless product.published? %>
@@ -76,6 +77,6 @@
       <%=  link_to '<button type="button"
                             class="btn col be-white color-secondary-bg shadow">Create Product
                     </button>'.html_safe,
-            "products/new" %>
+            new_product_url %>
     <% end %>
     <%= will_paginate @products %>

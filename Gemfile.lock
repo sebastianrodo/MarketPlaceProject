@@ -68,6 +68,7 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     alertifyjs-rails (1.12.0)
+    allow_numeric (0.1.0)
     aos (0.1.0)
     arbre (1.4.0)
       activesupport (>= 3.0.0, < 6.2)
@@ -283,6 +284,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   alertifyjs-rails
+  allow_numeric
   aos (~> 0.1.0)
   bootsnap (>= 1.4.2)
   bootstrap
