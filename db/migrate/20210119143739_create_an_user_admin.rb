@@ -1,4 +1,4 @@
-class AddAdmin < ActiveRecord::Migration[6.0]
+class CreateAnUserAdmin < ActiveRecord::Migration[6.0]
   def change
     User.create! do |u|
       u.first_name = 'Admin'
