@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.new(product_params)
+    #@product.to_yarm
     if @product.save
       respond_to do |format|
         format.html { redirect_to products_url, notice: 'Product was successfully saved.' }
@@ -42,7 +43,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if valid_product_owner!
+    if valid_product_owner! || current_user.admin_role?
       if @product.update(product_params)
         respond_to do |format|
           format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
@@ -60,7 +61,7 @@ class ProductsController < ApplicationController
   end
 
   def archive
-    if valid_product_owner!
+    if valid_product_owner! || current_user.admin_role?
       @product.archived!
       respond_to do |format|
         format.html { redirect_to products_url, notice: 'Product was successfully archived.' }

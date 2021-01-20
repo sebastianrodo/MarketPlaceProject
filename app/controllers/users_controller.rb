@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if valid_account_owner!
+    if valid_account_owner! || current_user.admin_role?
       @user.destroy
 
       respond_to do |format|
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if valid_account_owner!
+    if valid_account_owner! || current_user.admin_role?
       if @user.update(user_params)
         respond_to do |format|
           format.html { redirect_to users_url, notice: 'User was successfully updated.' }
