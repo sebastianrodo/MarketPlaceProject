@@ -29,7 +29,7 @@ gem 'bootstrap'
 # jquery
 gem 'jquery'
 #devise
-gem 'devise'
+gem 'devise', '~> 4.7', '>= 4.7.3'
 #postgresql
 gem 'pg'
 #will_paginate
@@ -46,6 +46,11 @@ gem 'alertifyjs-rails'
 gem 'rails_admin', '~> 2.0'
 #cancancan
 gem 'cancancan'
+#omniauth
+gem 'omniauth', '~> 1.2'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem 'devise_token_auth'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

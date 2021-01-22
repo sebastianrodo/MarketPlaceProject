@@ -2,12 +2,32 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
+
   has_many :products, dependent: :delete_all
 
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :cellphone, uniqueness: true, numericality: { only_integer: true,
-                                                          message: "should be numeric" }
+  validates :cellphone, uniqueness: true,format: { without: /\A[a-zA-Z]+\z/,
+    message: "only allows numbers" }
+
+
+  def self.from_omniauth(auth)
+    name_split = auth.info.name.split(" ")
+    user = User.where(email: auth.info.email).first
+    user ||= User.create!(provider: auth.provider, uid: auth.uid,
+                          first_name: auth.info.first_name, last_name: auth.info.last_name,
+                          email: auth.info.email, password: Devise.friendly_token[0, 20])
+    user
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.google_oauth2"] && session["devise.google_oauth2_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
 end

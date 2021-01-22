@@ -48,7 +48,7 @@
 }
 
 .form-style{
-  border: 3px solid #6572b8;
+  border: 1px solid #6572b8;
   border-radius: 7px;
   box-shadow: 3px 5px 15px grey;
 }
@@ -88,4 +88,8 @@
   transform: scale(1.1);
   border-radius: 10px;
   z-index: 100;
+}
+
+.margin-top{
+  margin-top: 1em;
 }

@@ -272,6 +272,14 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :google_oauth2, Rails.application.credentials.google_oauth2[:client_id],
+   Rails.application.credentials.google_oauth2[:client_secret],
+                    scope: 'userinfo.email, userinfo.profile'
+
+  config.omniauth :facebook, '232917618503286', '9d504fd80d181203757af0004a518ee8',
+                  callback_url: "https://agile-falls-26525.herokuapp.com/users/auth/facebook"
+
+
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -294,7 +302,7 @@ Devise.setup do |config|
   #
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
-  # config.omniauth_path_prefix = '/my_engine/users/auth'
+  #config.omniauth_path_prefix = '/users/auth'
 
   # ==> Turbolinks configuration
   # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
