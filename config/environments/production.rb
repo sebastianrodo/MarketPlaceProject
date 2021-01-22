@@ -112,4 +112,15 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  #Config send email
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'example.com',
+    user_name:            'sebastian.rodriguez@koombea.com',
+    password:             'rbmpghpxymkfzype',
+    authentication:       'plain',
+    enable_starttls_auto: true }
 end
