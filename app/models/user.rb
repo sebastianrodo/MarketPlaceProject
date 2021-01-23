@@ -28,6 +28,9 @@ class User < ApplicationRecord
       if data = session["devise.google_oauth2"] && session["devise.google_oauth2_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
       end
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
     end
   end
 end
