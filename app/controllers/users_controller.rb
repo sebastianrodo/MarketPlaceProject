@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :valid_account_owner!, only: [:update, :destroy]
   before_action :set_user, except: [:index, :new, :create]
 
   def index
@@ -39,31 +40,19 @@ class UsersController < ApplicationController
         format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
         format.json { head :no_content }
       end
-    else
-      respond_to do |format|
-        format.html { redirect_to users_url,
-                      alert: 'The account you want to delete does not belong to you' }
-      end
     end
   end
 
   def update
     if valid_account_owner! || current_user.admin_role?
-      if @user.update(user_params)
-        respond_to do |format|
+      respond_to do |format|
+        if @user.update(user_params)
           format.html { redirect_to users_url, notice: 'User was successfully updated.' }
           format.json { head :no_content }
-        end
-      else
-        respond_to do |format|
+        else
           format.html { render :edit }
           format.json { render json: @users.errors, status: :unprocessable_entity }
         end
-      end
-    else
-      respond_to do |format|
-        flash.now[:alert] = 'It was not updated, you are not this user.'
-        format.html { render :edit }
       end
     end
   end

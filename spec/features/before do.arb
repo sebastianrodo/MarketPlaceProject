@@ -1,0 +1,22 @@
+before do
+  FactoryGirl.define do
+    factory :user_with_products, class: Product, parent: :user do
+      after_create do |user|
+        FactoryGirl.create(:product, user: user)
+      end
+    end
+  end
+end
+
+
+FactoryGirl.define do
+  factory :user do
+    email 'test@example.com'
+    password '12345678'
+    first_name 'Fake_name'
+    last_name 'Fake_last_name'
+    after_build do |user|
+      user.products << FactoryGirl.build(:product, :user => user)
+    end
+  end
+end

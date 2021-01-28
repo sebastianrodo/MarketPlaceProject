@@ -27,8 +27,8 @@
                 <%= link_to '<button type="button"
                             class="btn btn-success">View
                                     </button>'.html_safe,
-                    "users/#{user.id}" %>
-              </td>
+                    user_path(user), id: "user_show" %>
+               </td>
               <!-- <td>
                 <center>
                   <%= link_to '<button type="button"

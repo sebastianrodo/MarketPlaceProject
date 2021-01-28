@@ -48,9 +48,15 @@ gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 #omniauth
 gem 'omniauth', '~> 1.2'
+#omniauth-facebook
 gem 'omniauth-facebook'
+#omniauth.google
 gem 'omniauth-google-oauth2'
+#devise_token_auth
 gem 'devise_token_auth'
+#pry
+gem 'pry', '~> 0.13.1'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -75,6 +81,9 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem "rspec-rails"
+  gem 'factory_bot_rails'
+  gem 'simplecov', require: false, group: :test
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

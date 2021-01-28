@@ -12,10 +12,24 @@ class ApplicationController < ActionController::Base
   end
 
   def valid_product_owner!
-    @product.user_id === current_user.id
+    return true if @product.user_id === current_user.id
+
+    respond_to do |format|
+      format.html { redirect_to products_url,
+                    alert: 'You cannot do this action, you are not the owner of this product.' }
+      format.json { head :no_content }
+    end
+    false
   end
 
   def valid_account_owner!
-    @user.id === current_user.id
+    return true if @user.id === current_user.id
+
+    respond_to do |format|
+      format.html { redirect_to products_url,
+                    alert: 'You cannot do this action, this account does not belong to you' }
+      format.json { head :no_content }
+    end
+    false
   end
 end
