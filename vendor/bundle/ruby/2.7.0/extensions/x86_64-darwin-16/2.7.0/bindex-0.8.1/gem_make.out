@@ -1,0 +1,15 @@
+current directory: /Users/koombea/Desktop/MarketPlace/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/koombea/.rvm/rubies/ruby-2.7.0/bin/ruby -I /Users/koombea/.rvm/rubies/ruby-2.7.0/lib/ruby/2.7.0 -r ./siteconf20210201-3520-y6087f.rb extconf.rb
+creating Makefile
+
+current directory: /Users/koombea/Desktop/MarketPlace/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /Users/koombea/Desktop/MarketPlace/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/koombea/Desktop/MarketPlace/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 cruby.bundle ./.gem.20210201-3520-1co4ie3/skiptrace/internal

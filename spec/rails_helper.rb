@@ -8,6 +8,8 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'pry'
+require 'factory_bot_rails'
+require 'database_cleaner/active_record'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -23,10 +25,17 @@ require 'pry'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
-
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+DatabaseCleaner.strategy = :truncation
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
@@ -34,6 +43,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, :type => :controller
   config.include Warden::Test::Helpers
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

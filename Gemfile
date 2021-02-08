@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -6,7 +8,7 @@ ruby '2.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 # Use sqlite3 as the database for Active Record
-#gem 'sqlite3', '~> 1.4'
+# gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -28,34 +30,38 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootstrap'
 # jquery
 gem 'jquery'
-#devise
+# devise
 gem 'devise', '~> 4.7', '>= 4.7.3'
-#postgresql
+# postgresql
 gem 'pg'
-#will_paginate
+# will_paginate
 gem 'will_paginate', '~> 3.1.0'
-#aos animation
+# aos animation
 gem 'aos', '~> 0.1.0'
-#cocoon
+# cocoon
 gem "cocoon"
-#paperclip
+# paperclip
 gem "paperclip"
-#alertify
+# alertify
 gem 'alertifyjs-rails'
-#activeadmin
+# activeadmin
 gem 'rails_admin', '~> 2.0'
-#cancancan
+# cancancan
 gem 'cancancan'
-#omniauth
+# omniauth
 gem 'omniauth', '~> 1.2'
-#omniauth-facebook
+# omniauth-facebook
 gem 'omniauth-facebook'
-#omniauth.google
+# omniauth.google
 gem 'omniauth-google-oauth2'
-#devise_token_auth
+# devise_token_auth
 gem 'devise_token_auth'
-#pry
+# pry
 gem 'pry', '~> 0.13.1'
+# figaro
+gem "figaro"
+# rubocop
+gem 'rubocop', require: false
 
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -82,8 +88,12 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem "rspec-rails"
-  gem 'factory_bot_rails'
   gem 'simplecov', require: false, group: :test
+  gem 'shoulda-matchers'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner-active_record'
+  gem 'rails-controller-testing'
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

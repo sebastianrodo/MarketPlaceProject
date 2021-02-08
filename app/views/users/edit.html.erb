@@ -11,10 +11,10 @@
                   height: 100%;
                   border-radius: 5px;">
     <h1 class="text-center color-secondary">EDIT USER</h1>
-    <%= form_with(model: @user, local: true) do |user| %>
+    <%= form_with(model: @user, local: true, html: { method: :put, id: "edit_user_form" }) do |user| %>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="inputEmail4">First Name</label>
+          <%= user.label :first_name %><br/>
           <%= user.text_field :first_name,  class:"form-control", placeholder:"First Name",
                                             required:"required" %>
         </div>

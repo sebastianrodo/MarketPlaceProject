@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
+# products controller
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  respond_to :html, :json, :js
-  before_action :set_product, except: [:index, :new, :create, :my_products]
-  before_action :valid_product_owner!, only: [:update]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :fetch_product, except: %i[index new create my_products]
+  before_action :valid_product_owner!, only: %i[update destroy]
 
   def index
     @products = Product.all.paginate(page: params[:page], per_page: 3).published
@@ -14,20 +16,18 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @product = current_user.products.new(product_params)
 
     respond_to do |format|
       if @product.save
-          format.html { redirect_to products_url, notice: 'Product was successfully saved.' }
-          format.json { head :no_content }
+        format.html { redirect_to products_url, notice: 'Product was successfully saved.' }
+        format.json { head :no_content }
       else
-          flash.now[:alert] = 'You have to complete all of inputs.'
-          format.html { render :new}
-          format.json { render json: @products.errors, status: :unprocessable_entity }
+        format.html { render :new, alert: 'You have to complete all of inputs.' }
+        format.json { render json: @products.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -38,46 +38,41 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
+
     redirect_to products_url
   end
 
   def update
     respond_to do |format|
-      if valid_product_owner! || current_user.admin_role?
-          if @product.update(product_params)
-              format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
-              format.json { head :no_content }
-          else
-              format.html { render :edit }
-              format.json { render json: @products.errors, status: :unprocessable_entity }
-          end
+      if @product.update(product_params)
+        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render :edit }
+        format.json { render json: @products.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def archive
-    if valid_product_owner! || current_user.admin_role?
-      @product.archived!
+    @product.archived!
 
-      respond_to do |format|
-        format.html { redirect_to products_url, notice: 'Product was successfully archived.' }
-        format.json { head :no_content }
-      end
+    respond_to do |format|
+      format.html { redirect_to products_url, notice: 'Product was successfully archived.' }
+      format.json { head :no_content }
     end
   end
 
   def publish
-    if valid_product_owner!
-      @product.published!
+    @product.published!
 
-      User.find_each do |user|
-        NotifierMailer.email(user, @product).deliver_later
-      end
+    User.find_each do |user|
+      NotifierMailer.email(user, @product).deliver_later
+    end
 
-      respond_to do |format|
-        format.html { redirect_to my_products_url, notice: 'Product was successfully published.' }
-        format.json { head :no_content }
-      end
+    respond_to do |format|
+      format.html { redirect_to my_products_url, notice: 'Product was successfully published.' }
+      format.json { head :no_content }
     end
   end
 
@@ -94,10 +89,10 @@ class ProductsController < ApplicationController
                                     :quantity,
                                     :price,
                                     :category_id,
-                                    images_attributes: [:id, :image, :_destroy])
+                                    images_attributes: %i[id image _destroy])
   end
 
-  def set_product
+  def fetch_product
     @product = Product.find(params[:id])
   end
 end
