@@ -10,7 +10,7 @@ RSpec.feature "Products", type: :feature do
 
   context 'visit product show page' do
     before do
-      create(:product)
+      create(:product, :published)
     end
 
     after do

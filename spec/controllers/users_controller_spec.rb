@@ -133,7 +133,7 @@ RSpec.describe UsersController, type: :controller do
       it { expect(response).to have_http_status '200' }
     end
 
-    context 'expect to be fail, invalid params' do
+    context 'update expect to be fail, invalid params' do
       let(:user) { create(:user) }
       let(:params) do
         { id: user.id,
@@ -194,6 +194,8 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it { expect{ subject }.to change{ user.reload.first_name }.from('Fake_name').to('Juan') }
+      it { expect(response).to be_successful }
+      it { expect(response).to have_http_status '200' }
     end
 
     context 'try to update without sign in, as a guest' do
@@ -228,7 +230,7 @@ RSpec.describe UsersController, type: :controller do
       it { expect{ subject }.to change(User, :count).by(-1) }
     end
 
-    context 'try to delete another user that not belong to them' do
+    context 'try to delete another user that not belongs to them' do
       let(:user) { create(:user) }
       let(:user2) { create(:user, :with_specific_id) }
       let(:params) { { id: user2.id } }
@@ -252,9 +254,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it{ expect{ subject }.to change(User, :count).by(-1) }
-
     end
-
 
     context 'try to delete without sign in, as a guest' do
       let(:user) { create(:user) }
