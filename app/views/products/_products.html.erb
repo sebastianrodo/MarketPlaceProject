@@ -1,12 +1,9 @@
 <h1 class="be-white"><%= name %></h1><br>
 <div  class="card-deck"
-      id="card"
       data-aos="zoom-out"
       data-aos-duration="1200">
   <% @products.each do |product| %>
-
-    <div class="card shadow">
-
+    <div class="target card shadow">
       <% @img.find do |img| %>
         <% if img.product_id == product.id %>
           <%= image_tag img.image.url(), class:"card-img-top", alt:"Card image cap" %>
@@ -44,7 +41,8 @@
                                 </button>'.html_safe,
                                 "/products/#{product.id}/archive",
                                 method: :put,
-                                remote: true%>
+                                data: {'js-hide-card' => true},
+                                remote: true %>
                 </center>
               </div>
               <% end %>
@@ -57,14 +55,17 @@
                 </center>
               </div>
               <% unless product.published? %>
-              <div class="col-sm top-space-xs">
+              <div class="btn_publish col-sm top-space-xs">
                 <center>
                   <%= link_to '<button
                                   type="button"
-                                  class="btn btn-warning">Publish
+                                  class="btn btn-warning"
+                                  id="hide">Publish
                                 </button>'.html_safe,
                                 "/products/#{product.id}/publish",
-                                method: :put%>
+                                method: :put,
+                                data: {'js-hide-btn' => true},
+                                remote: true %>
                 </center>
               </div>
               <% end %>
