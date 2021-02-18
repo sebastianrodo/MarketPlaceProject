@@ -18,5 +18,4 @@ RSpec.describe Users::OmniauthCallbacksController, :type => :controller do
 
     it_behaves_like 'OmniauthSignInControllerSpec'
   end
-
 end

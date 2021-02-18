@@ -13,7 +13,7 @@
           null,
           null,
           1,
-          44,
+          47,
           null,
           null
         ]
@@ -22,11 +22,11 @@
         "lines": [
           1,
           1,
-          44,
-          44,
-          44,
-          44,
-          34,
+          47,
+          47,
+          47,
+          47,
+          37,
           1,
           1,
           null,
@@ -45,11 +45,11 @@
         "lines": [
           1,
           1,
-          152,
+          155,
+          165,
           162,
-          159,
-          159,
           162,
+          165,
           null,
           1,
           4,
@@ -406,8 +406,8 @@
           null,
           1,
           null,
-          0,
-          0,
+          null,
+          null,
           null,
           1,
           1,
@@ -530,6 +530,9 @@
           1,
           null,
           null,
+          null,
+          null,
+          1,
           null,
           null,
           1,
@@ -907,7 +910,6 @@
           null,
           null,
           1,
-          null,
           null,
           null,
           null,
@@ -1811,7 +1813,6 @@
           null,
           1,
           null,
-          null,
           null
         ]
       },
@@ -1856,13 +1857,6 @@
           5,
           5,
           null,
-          null,
-          null,
-          1,
-          null,
-          0,
-          null,
-          0,
           null,
           null,
           null
@@ -2562,6 +2556,63 @@
           null
         ]
       },
+      "/Users/koombea/Desktop/MarketPlace/spec/mailers/notifier_mailer_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          4,
+          null,
+          4,
+          4,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/koombea/Desktop/MarketPlace/app/mailers/notifier_mailer.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          3,
+          3,
+          null,
+          3,
+          null,
+          null
+        ]
+      },
+      "/Users/koombea/Desktop/MarketPlace/app/mailers/application_mailer.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/koombea/Desktop/MarketPlace/spec/models/product_model_spec.rb": {
         "lines": [
           1,
@@ -2774,36 +2825,6 @@
           null
         ]
       },
-      "/Users/koombea/Desktop/MarketPlace/app/mailers/notifier_mailer.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null
-        ]
-      },
-      "/Users/koombea/Desktop/MarketPlace/app/mailers/application_mailer.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
       "/Users/koombea/Desktop/MarketPlace/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
@@ -2838,6 +2859,6 @@
         ]
       }
     },
-    "timestamp": 1613406805
+    "timestamp": 1613687248
   }
 }
