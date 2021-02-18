@@ -278,8 +278,6 @@ Devise.setup do |config|
   config.omniauth :facebook, '232917618503286', '9d504fd80d181203757af0004a518ee8',
                   callback_url: "https://agile-falls-26525.herokuapp.com/users/auth/facebook/callback"
 
-
-
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

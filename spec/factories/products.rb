@@ -6,7 +6,7 @@ FactoryBot.define do
     price { 5000000 }
     state { 2 }
     association :user
-    association :category
+    association :category, :random
 
     trait :with_specific_id do
       id { 1 }

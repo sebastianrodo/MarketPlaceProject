@@ -34,11 +34,23 @@ class ApplicationController < ActionController::Base
   def valid_account_owner!
     return true if (@user.id == current_user.id) || current_user.admin_role?
 
-    flash.now[:alert] = 'You cannot do this action, this account does not belong to you.'
     respond_to do |format|
       format.html do
         redirect_to users_url,
                     alert: 'You cannot do this action, this account does not belong to you.'
+      end
+      format.json { head :no_content }
+    end
+    false
+  end
+
+  def valid_admin!
+    return true if current_user.admin_role?
+
+    respond_to do |format|
+      format.html do
+        redirect_to users_url,
+                    alert: 'You cannot do this action, you are not ADMIN.'
       end
       format.json { head :no_content }
     end

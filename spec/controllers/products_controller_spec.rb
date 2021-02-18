@@ -97,12 +97,12 @@ RSpec.describe ProductsController, type: :controller do
 
     context "as a guest" do
       it "returns a 302 response" do
-        post :create, params: { project: product_params }
+        post :create, params: { product: product_params }
         expect(response).to have_http_status '302'
       end
 
       it "redirects to the sign-in page" do
-        post :create, params: { project: product_params }
+        post :create, params: { product: product_params }
         expect(response).to redirect_to "/users/sign_in"
       end
     end
@@ -315,7 +315,6 @@ RSpec.describe ProductsController, type: :controller do
     before do
       sign_in product.user
       subject
-      #controller.instance_variable_set(:@product, product)
     end
 
     it { expect(assigns(:products).size).to eq(1) }
