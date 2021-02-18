@@ -94,6 +94,7 @@ group :test do
   gem 'database_cleaner-active_record'
   gem 'rails-controller-testing'
   gem 'faker'
+  gem 'rspec-mocks', '~> 3.4', '>= 3.4.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

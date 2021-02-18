@@ -43,6 +43,9 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  Dir[Rails.root.join("spec/models/shared_examples/**/*.rb")].each {|f| require f}
+  Dir[Rails.root.join("spec/controllers/shared_examples/**/*.rb")].each {|f| require f}
+  config.raise_errors_for_deprecations!
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, :type => :controller
   config.include Warden::Test::Helpers

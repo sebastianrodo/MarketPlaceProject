@@ -451,6 +451,7 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.4)
   rails-controller-testing
   rails_admin (~> 2.0)
+  rspec-mocks (~> 3.4, >= 3.4.1)
   rspec-rails
   rubocop
   sass-rails (>= 6)

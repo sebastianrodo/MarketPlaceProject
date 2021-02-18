@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :categories
 
   root to: "products#index"
-  put "/products/:id/archive", to: "products#archive"
-  put "/products/:id/publish", to: "products#publish"
+  put "/products/:id/archive", to: "products#archive", as: :archive
+  put "/products/:id/publish", to: "products#publish", as: :publish
   get "/my_products", to: "products#my_products", as: :my_products
 end
