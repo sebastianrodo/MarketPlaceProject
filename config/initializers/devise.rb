@@ -273,7 +273,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2, ENV["google_app_id"], ENV["google_key"],
-                  scope: 'userinfo.email, userinfo.profile'
+                  scope: "userinfo.email, userinfo.profile"
 
   config.omniauth :facebook, ENV["facebook_app_id"], ENV["facebook_key"],
                   callback_url: ENV["callback_facebook"]
