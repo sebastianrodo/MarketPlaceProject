@@ -4,6 +4,8 @@
 module Users
   # omniauth callbacks controller used to get the callback of the API
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    skip_before_action :verify_authenticity_token
+
     def facebook
       @user = User.from_omniauth(request.env['omniauth.auth'])
 
