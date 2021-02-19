@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+# module user
 module Users
   # omniauth callbacks controller used to get the callback of the API
-  class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def facebook
       @user = User.from_omniauth(request.env['omniauth.auth'])
 

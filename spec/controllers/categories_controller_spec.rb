@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
@@ -34,8 +36,9 @@ RSpec.describe CategoriesController, type: :controller do
       it { expect(response).to have_http_status '302' }
       it { expect(assigns(:categories)).to be_nil }
       it { is_expected.not_to render_template :index }
-      it "redirects to the sign-in page" do
-        expect(response).to redirect_to "/users/sign_in"
+
+      it 'redirects to the sign-in page' do
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
   end
@@ -70,8 +73,9 @@ RSpec.describe CategoriesController, type: :controller do
       it { expect(response).to have_http_status '302' }
       it { expect(assigns(:category)).to be_nil }
       it { is_expected.not_to render_template :index }
-      it "redirects to the sign-in page" do
-        expect(response).to redirect_to "/users/sign_in"
+
+      it 'redirects to the sign-in page' do
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
 
@@ -105,50 +109,51 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       context 'with valid attributes' do
-        it "adds a category" do
-          expect {
+        it 'adds a category' do
+          expect do
             post :create, params: { category: category_params }
-          }.to change(Category, :count).by(1)
+          end.to change(Category, :count).by(1)
         end
       end
 
-      context "with invalid attributes" do
-        it "adds a category" do
-          expect {
-            post :create, params: {  category: invalid_category_params }
-          }.to_not change(Category, :count)
+      context 'with invalid attributes' do
+        it 'adds a category' do
+          expect do
+            post :create, params: { category: invalid_category_params }
+          end.not_to change(Category, :count)
         end
       end
     end
 
-    context "as a guest" do
-      it "returns a 302 response" do
+    context 'as a guest' do
+      it 'returns a 302 response' do
         post :create, params: { category: category_params }
         expect(response).to have_http_status '302'
       end
 
-      it "redirects to the sign-in page" do
+      it 'redirects to the sign-in page' do
         post :create, params: { category: category_params }
-        expect(response).to redirect_to "/users/sign_in"
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
 
-    context "as normal user" do
+    context 'as normal user' do
       let(:user) { create(:user) }
+
       before do
         sign_in user
       end
 
-      it "adds a category" do
-        expect {
+      it 'adds a category' do
+        expect do
           post :create, params: {  category: category_params }
-        }.to_not change(Category, :count)
+        end.not_to change(Category, :count)
       end
     end
   end
 
   describe 'GET #new' do
-    subject { get :new, params: { } }
+    subject { get :new, params: {} }
 
     context 'expect be successfully' do
       let(:admin) { create(:user, :admin) }
@@ -158,7 +163,7 @@ RSpec.describe CategoriesController, type: :controller do
         subject
       end
 
-      it { expect(assigns(:category)).to_not be_nil }
+      it { expect(assigns(:category)).not_to be_nil }
       it { expect(assigns(:category)).to be_a_new(Category) }
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
@@ -176,14 +181,13 @@ RSpec.describe CategoriesController, type: :controller do
       let(:params) do
         { id: category.id,
           category: { name: 'Home' } }
-
       end
 
       before do
         sign_in admin
       end
 
-      it { expect{ subject }.to change{ category.reload.name }.from('Technology').to('Home') }
+      it { expect { subject }.to change { category.reload.name }.from('Technology').to('Home') }
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
     end
@@ -200,7 +204,7 @@ RSpec.describe CategoriesController, type: :controller do
         sign_in admin
       end
 
-      it { expect{ subject }.to_not change{ category.reload.name } }
+      it { expect { subject }.not_to change { category.reload.name } }
     end
 
     context 'try update without be admin' do
@@ -215,7 +219,7 @@ RSpec.describe CategoriesController, type: :controller do
         sign_in user
       end
 
-      it { expect{ subject }.to_not change{ category.reload.name } }
+      it { expect { subject }.not_to change { category.reload.name } }
     end
 
     context 'expect to be fail, the category to update not exist' do
@@ -236,6 +240,7 @@ RSpec.describe CategoriesController, type: :controller do
 
   describe 'DELETE #destroy' do
     subject { delete :destroy, params: params }
+
     let(:admin) { create(:user, :admin) }
 
     context 'delete, with as admin user' do
@@ -247,7 +252,7 @@ RSpec.describe CategoriesController, type: :controller do
         sign_in admin
       end
 
-      it { expect{ subject }.to change(Category, :count).by(-1) }
+      it { expect { subject }.to change(Category, :count).by(-1) }
     end
 
     context 'try to delete without sign in, as a guest' do
@@ -258,15 +263,14 @@ RSpec.describe CategoriesController, type: :controller do
         category
       end
 
-      it { expect{ subject }.to_not change(Category, :count) }
+      it { expect { subject }.not_to change(Category, :count) }
 
-      it "redirects to the sign-in page" do
+      it 'redirects to the sign-in page' do
         subject
-        expect(response).to have_http_status "302"
-        expect(response).to redirect_to "/users/sign_in"
+        expect(response).to have_http_status '302'
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
-
 
     context 'try to delete, as normal user' do
       let(:category) { create(:category) }
@@ -278,7 +282,7 @@ RSpec.describe CategoriesController, type: :controller do
         sign_in user
       end
 
-      it { expect{ subject }.to_not change(Category, :count) }
+      it { expect { subject }.not_to change(Category, :count) }
     end
   end
 end

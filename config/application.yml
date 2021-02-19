@@ -1,0 +1,10 @@
+facebook_app_id: "232917618503286"
+facebook_key: 9d504fd80d181203757af0004a518ee8
+callback_facebook: "http://localhost:3000/users/auth/facebook/callback"
+
+google_app_id: "741653950344-a89qqvi88ijig4elp6unptpl1na2hbe8.apps.googleusercontent.com"
+google_key: 3PiBzhOJmdIjc5r3Zu7JT_czs
+
+production:
+  callback_facebook: "https://agile-falls-26525.herokuapp.com/users/auth/facebook/callback"
+

@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Users::OmniauthCallbacksController, :type => :controller do
+RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   describe 'Facebook' do
     subject { get :facebook }
+
     let(:user_stub) { stub_env_for_omniauth_facebook }
     let(:provider) { 'facebook' }
     let(:uid) { '1234' }
@@ -11,7 +14,8 @@ RSpec.describe Users::OmniauthCallbacksController, :type => :controller do
   end
 
   describe 'Google' do
-    subject { get :google_oauth2}
+    subject { get :google_oauth2 }
+
     let(:user_stub) { stub_env_for_omniauth_google }
     let(:provider) { 'google' }
     let(:uid) { '1234' }

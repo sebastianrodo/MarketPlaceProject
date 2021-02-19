@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :product do
     name { 'PC MASTER RACE' }
     description { '4gb RAM, 2TB SOLID DISK' }
     quantity { 9 }
-    price { 5000000 }
+    price { 5_000_000 }
     state { 2 }
     association :user
     association :category, :random

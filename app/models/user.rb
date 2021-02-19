@@ -14,10 +14,10 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :cellphone, uniqueness: true,
-            allow_blank: true,
-            allow_nil: true,
-            format: { without: /\A[a-zA-Z]+\z/,
-                                                    message: 'only allows numbers' }
+                        allow_blank: true,
+                        allow_nil: true,
+                        format: { without: /\A[a-zA-Z]+\z/,
+                                  message: 'only allows numbers' }
 
   def self.from_omniauth(auth)
     name_split = auth.info.name.split(' ')

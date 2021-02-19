@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.unique.email }
@@ -12,7 +14,7 @@ FactoryBot.define do
 
     trait :another do
       first_name { 'Sebastian' }
-    last_name  { 'Rodriguez' }
+      last_name { 'Rodriguez' }
     end
 
     trait :admin do
