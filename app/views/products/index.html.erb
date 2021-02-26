@@ -13,7 +13,6 @@
               <li class="list-group-item">Quantity: <%= product.quantity %></li>
               <li class="list-group-item">Price: $<%= product.price %></li>
             </ul>
-
           </div>
           <div class="card-footer">
             <small class="text-muted">Product updated 3 mins ago</small>
@@ -21,7 +20,6 @@
         </div>
       <%end%>
     </div>
-    <br><%=  link_to '<button type="button" class="btn btn-primary col" >Create Product</button>'.html_safe,
-             "products/new" %>
+    <br><%=  link_to 'Create Product', new_product_path, class: 'btn btn-primary col' %>
   </div>
 </div>
