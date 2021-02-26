@@ -13,16 +13,14 @@
               <li class="list-group-item">Quantity: <%= product.quantity %></li>
               <li class="list-group-item">Price: $<%= product.price %></li>
             </ul>
-            <center><button type="button" class="btn btn-danger">
-              <%= link_to "Delete",
-                  product,
-                  method: :delete,
-                  style:"color:white; text-decoration:none;" %>
-            </button></center><br>
-            <center><button type="button" class="btn btn-success">
-              <%=  link_to 'Edit', "products/#{product.id}/edit",
-                    style:"color:white; text-decoration:none;" %>
-            </button></center>
+            <center>
+              <%= button_to 'Delete', product, method: :delete,
+                  type: 'button', class: 'btn btn-danger' %>
+            </center><br>
+            <center>
+              <%= link_to 'Edit', edit_product_path(product),
+                  type: 'button', class: 'btn btn-success' %>
+            </center>
           </div>
           <div class="card-footer">
             <small class="text-muted">-------</small>
@@ -31,7 +29,6 @@
       <%end%>
     </div>
     <%= link_to "Cerrar session", destroy_user_session_path, method: :delete %>
-    <br><%=  link_to '<button type="button" class="btn btn-primary col" >Create Product</button>'.html_safe,
-             "products/new" %>
+    <br><%=  link_to 'Create Product', new_product_path, class: 'btn btn-primary col' %>
   </div>
 </div><br>

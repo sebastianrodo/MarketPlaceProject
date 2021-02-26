@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  #before_action :set_product, only: [:update]
+  before_action :fetch_product, except: [:index, :new, :create]
 
   def index
     @products = Product.all
@@ -11,9 +11,7 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
-  def edit
-    @product = Product.find(params[:id])
-  end
+  def edit; end
 
   def create
     @product = current_user.products.new(product_params)
@@ -23,18 +21,16 @@ class ProductsController < ApplicationController
       redirect_to products_url
     else
       flash[:error] = "Something went wrong"
-      render 'new'
+      render :new
     end
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_url
   end
 
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
       redirect_to products_url
     else
@@ -47,7 +43,7 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :description, :quantity, :price, :category)
   end
 
-  def set_product
+  def fetch_product
     @product = Product.find(params[:id])
   end
 end
