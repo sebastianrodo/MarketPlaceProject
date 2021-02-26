@@ -16,7 +16,6 @@
         </tr>
       </thead>
       <tbody>
-
           <% @users.each do |user| %>
             <tr class="table-light">
               <th scope="row"><%= user.id %></th>
@@ -25,31 +24,17 @@
               <td><%= user.email %></td>
               <td><%= user.cellphone %></td>
               <td><%= user.address %></td>
-              <td>
-                <button type="button"class="btn btn-success" >
-                  <%=  link_to 'View', "users/#{user.id}",
-                        style:"color:white; text-decoration:none;" %>
-                </button>
+              <td><%= link_to 'Show', user_path(user), class: 'btn btn-success' %></td>
+              <td><%= link_to 'Delete', user, method: :delete,
+                      type: 'button', class: 'btn btn-danger'%>
               </td>
               <td>
-                <center>
-                  <button type="button" class="btn btn-danger">
-                    <%= link_to "Delete",
-                        user,
-                        method: :delete,
-                        style:"color:white; text-decoration:none;" %>
-                  </button>
-                </center>
-             </td>
-             <td>
-              <center>
                 <button type="button" class="btn btn-primary">
                   <%=  link_to 'Edit', "users/#{user.id}/edit",
                         style:"color:white; text-decoration:none;" %>
                 </button>
-              </center>
-           </td>
-             </tr>
+              </td>
+            </tr>
           <%end%>
       </tbody>
     </table>
