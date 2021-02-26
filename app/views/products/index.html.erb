@@ -14,28 +14,21 @@
               <li class="list-group-item">Description: <%= product.description %></li>
               <li class="list-group-item">Quantity: <%= product.quantity %></li>
               <li class="list-group-item">Price: $<%= product.price %></li>
-            </ul><br>
-
+            </ul>
           </div>
           <div class="card-footer">
             <div class="container-fluid">
               <div class="row">
                 <div class="col">
                   <center>
-                    <button type="button" class="btn btn-danger">
-                      <%= link_to "Delete",
-                          product,
-                          method: :delete,
-                          style:"color:white; text-decoration:none;" %>
-                    </button>
+                    <%= button_to 'Delete', product, method: :delete,
+                        type: 'button', class: 'btn btn-danger' %>
                   </center>
                 </div>
                 <div class="col">
                   <center>
-                    <button type="button" class="btn btn-success">
-                      <%=  link_to 'Edit', "products/#{product.id}/edit",
-                            style:"color:white; text-decoration:none;" %>
-                    </button>
+                    <%= link_to 'Edit', edit_product_path(product),
+                        type: 'button', class: 'btn btn-success' %>
                   </center>
                 </div>
               </div>
@@ -44,10 +37,7 @@
         </div>
       <%end%>
     </div><br>
-    <%=  link_to '<button type="button"
-                          class="btn col be-white color-secondary-bg shadow">Create Product
-                  </button>'.html_safe,
-          "products/new" %>
+    <%=  link_to 'Create Product', new_product_path, class: 'btn btn-primary col' %>
     <%= will_paginate @products %>
   </div>
 </div><br>
