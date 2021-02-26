@@ -1,0 +1,32 @@
+<div class="top-space">
+  <div class="container">
+    <h1 class="text-center be-light-blue">CREATE USER</h1>
+    <%= form_for(@user) do |user| %>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">First Name</label>
+          <%= user.text_field :first_name, class:"form-control", placeholder:"First Name" %>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Last Name</label>
+          <%= user.text_field :last_name, class:"form-control", placeholder:"Last Name" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Email</label>
+          <%= user.text_field :email, class:"form-control", placeholder:"Email" %>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Cellphone</label>
+          <%= user.text_field :cellphone, class:"form-control", placeholder:"Cellphone" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAddress">Address</label>
+        <%= user.text_field :address, class:"form-control", placeholder:"Address" %>
+      </div>
+      <%= user.submit "Save", class:"btn btn-primary"%>
+    <%end%>
+  </div>
+</div>
