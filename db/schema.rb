@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_155709) do
     t.string "last_name", null: false
     t.string "email", null: false
     t.bigint "cellphone"
-    t.string "address", default: ""
+    t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "encrypted_password", default: "", null: false
