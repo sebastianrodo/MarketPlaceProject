@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
       redirect_to products_url
     else
       flash[:error] = "Something went wrong"
-      render 'new'
+      render :new
     end
   end
 

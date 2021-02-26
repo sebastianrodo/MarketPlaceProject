@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       redirect_to users_url
     else
       flash[:error] = "Something went wrong"
-      render 'new'
+      render :new
     end
   end
 
