@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.new(product_params)
-    @product.category_id = params[:category]
+    #@product.to_yml
     if @product.save
       flash[:success] = "Product successfully created"
       redirect_to products_url
@@ -27,6 +27,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+
     @images = Image.where(product_id: params[:id])
   end
 
@@ -61,7 +62,7 @@ class ProductsController < ApplicationController
                                     :description,
                                     :quantity,
                                     :price,
-                                    :category,
+                                    :category_id,
                                     images_attributes: [:id, :image, :_destroy])
   end
 
