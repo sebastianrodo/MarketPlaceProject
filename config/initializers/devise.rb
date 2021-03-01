@@ -272,12 +272,11 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :google_oauth2, Rails.application.credentials.google_oauth2[:client_id],
-   Rails.application.credentials.google_oauth2[:client_secret],
-                    scope: 'userinfo.email, userinfo.profile'
+  config.omniauth :google_oauth2, '741653950344-a89qqvi88ijig4elp6unptpl1na2hbe8.apps.googleusercontent.com',
+  '3PiBzhOJmdIjc5r3Zu7JT_cz', scope: 'userinfo.email, userinfo.profile'
 
   config.omniauth :facebook, '232917618503286', '9d504fd80d181203757af0004a518ee8',
-                  callback_url: "https://agile-falls-26525.herokuapp.com/users/auth/facebook"
+                  callback_url: "https://agile-falls-26525.herokuapp.com/users/auth/facebook/callback"
 
 
 

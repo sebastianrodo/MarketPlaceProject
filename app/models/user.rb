@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     name_split = auth.info.name.split(" ")
+    auth.info.first_name = name_split[0] if auth.info.first_name.blank?
+    auth.info.last_name = name_split[1] if auth.info.last_name.blank?
     user = User.where(email: auth.info.email).first
     user ||= User.create!(provider: auth.provider, uid: auth.uid,
                           first_name: auth.info.first_name, last_name: auth.info.last_name,
@@ -24,6 +26,9 @@ class User < ApplicationRecord
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.google_oauth2"] && session["devise.google_oauth2_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
       end
     end
