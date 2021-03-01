@@ -19,16 +19,21 @@
           <div class="card-footer">
             <div class="container-fluid">
               <div class="row">
-                <div class="col">
+                <div class="col-sm">
+                  <center>
+                    <%= link_to 'Show', product_path(product), class: 'btn btn-success' %>
+                  </center>
+                </div>
+                <div class="col-sm">
                   <center>
                     <%= button_to 'Delete', product, method: :delete,
                         type: 'button', class: 'btn btn-danger' %>
                   </center>
                 </div>
-                <div class="col">
+                <div class="col-sm">
                   <center>
                     <%= link_to 'Edit', edit_product_path(product),
-                        type: 'button', class: 'btn btn-success' %>
+                        type: 'button', class: 'btn btn-primary' %>
                   </center>
                 </div>
               </div>

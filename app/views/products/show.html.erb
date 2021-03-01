@@ -1,0 +1,21 @@
+<div  class="container shadow background-white"
+      style="width: 1200px;
+            height: 100%;
+            border-radius: 5px;">
+  <h1 class="top-space"><%= @product.name %></h1>
+  <div class="row top-space bottom-space">
+    <div class="col-8">
+      <img src="https://i.blogs.es/2f4737/realme-6/1366_2000.jpg" width="100%" height="100%">
+    </div>
+    <div class="col-4">
+      <label class="top-space be-red">Price</label>
+      <h4 class="be-success-green">$ <%= @product.price %></h4>
+
+      <label class="top-space be-red">Quantity</label>
+      <h5><%= @product.quantity %></h5>
+
+      <label class="top-space be-red">Description</label>
+      <h5><%= @product.description %></h5>
+    </div>
+  </div>
+</div>

@@ -29,10 +29,8 @@
                       type: 'button', class: 'btn btn-danger'%>
               </td>
               <td>
-                <button type="button" class="btn btn-primary">
-                  <%=  link_to 'Edit', "users/#{user.id}/edit",
-                        style:"color:white; text-decoration:none;" %>
-                </button>
+                <%= link_to 'Edit', edit_user_path(user),
+                    type: 'button', class: 'btn btn-primary' %>
               </td>
             </tr>
           <%end%>

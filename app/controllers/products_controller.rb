@@ -25,6 +25,8 @@ class ProductsController < ApplicationController
     end
   end
 
+  def show; end
+
   def destroy
     @product.destroy
     redirect_to products_url
