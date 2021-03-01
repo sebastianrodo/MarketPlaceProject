@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
 
-  put "/products/:id/archive" => "products#archive"
+  put "/products/:id/archive" => "products#archive", :as => :archive
 end

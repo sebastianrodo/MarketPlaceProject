@@ -6,8 +6,11 @@
           data-aos-duration="1200">
       <% @products.each do |product| %>
         <div class="card shadow">
-          <img class="card-img-top" src="https://i.blogs.es/2f4737/realme-6/1366_2000.jpg"
-                alt="Card image cap">
+          <% @img.find do |img| %>
+            <% if img.product_id == product.id %>
+              <%= image_tag img.image.url(), class:"card-img-top", alt:"Card image cap" %>
+            <% end %>
+          <% end %>
           <div class="card-body">
             <h3 class="card-title"><%= product.name %></h3>
             <ul class="list-group list-group-fluid">
@@ -24,18 +27,20 @@
                     <%= link_to 'Show', product_path(product), class: 'btn btn-success' %>
                   </center>
                 </div>
-                <div class="col-sm">
-                  <center>
-                    <%= button_to 'Delete', product, method: :delete,
-                        type: 'button', class: 'btn btn-danger' %>
-                  </center>
-                </div>
-                <div class="col-sm">
-                  <center>
-                    <%= link_to 'Edit', edit_product_path(product),
-                        type: 'button', class: 'btn btn-primary' %>
-                  </center>
-                </div>
+                <% if user_signed_in? %>
+                  <div class="col-sm">
+                    <center>
+                      <%= link_to 'Archive', archive_path(product), method: :put,
+                          type: 'button', class: 'btn btn-danger' %>
+                    </center>
+                  </div>
+                  <div class="col-sm">
+                    <center>
+                      <%= link_to 'Edit', edit_product_path(product),
+                          type: 'button', class: 'btn btn-primary' %>
+                    </center>
+                  </div>
+                <%end%>
               </div>
             </div>
           </div>
