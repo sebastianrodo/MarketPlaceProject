@@ -40,5 +40,5 @@
 yarn-debug.log*
 .yarn-integrity
 
-# Ignire images
+# Ignore images
 /public/system/images
