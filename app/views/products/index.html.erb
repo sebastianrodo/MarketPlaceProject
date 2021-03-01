@@ -1,0 +1,25 @@
+<div class="top-space">
+  <div class="container">
+    <h1 class="text-center be-light-blue">PRODUCTS</h1><br>
+    <div class="card-deck">
+      <% @products.each do |product| %>
+        <div class="card">
+          <img class="card-img-top" src="https://i.blogs.es/2f4737/realme-6/1366_2000.jpg"
+                alt="Card image cap">
+          <div class="card-body">
+            <h3 class="card-title"><%= product.name %></h3>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Description: <%= product.description %></li>
+              <li class="list-group-item">Quantity: <%= product.quantity %></li>
+              <li class="list-group-item">Price: $<%= product.price %></li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Product updated 3 mins ago</small>
+          </div>
+        </div>
+      <%end%>
+    </div>
+    <br><%=  link_to 'Create Product', new_product_path, class: 'btn btn-primary col' %>
+  </div>
+</div>
