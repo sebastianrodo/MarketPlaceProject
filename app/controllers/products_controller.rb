@@ -53,9 +53,8 @@ class ProductsController < ApplicationController
   def archive
     @product.archived!
 
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully archived.' }
-    end
+    # flash[:notice] = 'Product was successfully archived.'
+    # redirect_to @product
   end
 
   def publish
@@ -64,10 +63,9 @@ class ProductsController < ApplicationController
     User.find_each do |user|
       NotifierMailer.email(user, @product).deliver_later
     end
-
-    respond_to do |format|
-      format.html { redirect_to my_products_url, notice: 'Product was successfully published.' }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to my_products_url, notice: 'Product was successfully published.' }
+    # end
   end
 
   def my_products

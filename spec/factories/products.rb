@@ -4,8 +4,16 @@ FactoryBot.define do
     description { '4gb RAM, 2TB SOLID DISK' }
     quantity { 9 }
     price { 5000000 }
-    state { 0 }
+    state { 2 }
     association :user
     association :category
+
+    trait :with_specific_id do
+      id { 1 }
+    end
+
+    trait :published do
+      state { 0 }
+    end
   end
 end
