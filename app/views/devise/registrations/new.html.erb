@@ -1,0 +1,55 @@
+<div class="container">
+  <h2 class="be-light-blue">Sign up</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field top-space">
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name, class:"form-control", placeholder:"First Name" %>
+    </div>
+
+    <div class="field top-space">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name, class:"form-control", placeholder:"Last Name" %>
+    </div>
+
+    <div class="field top-space">
+      <%= f.label :cellphone %><br />
+      <%= f.text_field :cellphone, class:"form-control", placeholder:"Cellphone" %>
+    </div>
+
+    <div class="field top-space">
+      <%= f.label :address %><br />
+      <%= f.text_field :address, class:"form-control", placeholder:"Address" %>
+    </div>
+
+    <div class="field top-space">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, class:"form-control", autofocus: true, autocomplete: "email",
+          placeholder:"Email"  %>
+    </div>
+
+    <div class="field top-space">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, class:"form-control", autocomplete: "new-password",
+          placeholder:"Password"  %>
+    </div>
+
+    <div class="field top-space">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, class:"form-control", autocomplete: "new-password",
+          placeholder:"Password Confirmation"  %>
+    </div>
+
+    <div class="actions top-space">
+      <%= f.submit "Sign up", class:"btn btn-primary col" %>
+    </div>
+  <% end %>
+  <div class="bottom-space top-space">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

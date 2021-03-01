@@ -1,5 +1,6 @@
-class CreateProducts < ActiveRecord::Migration[6.0]
+class CreateTableProducts < ActiveRecord::Migration[6.0]
   def change
+    drop_table :products
     create_table :products do |t|
       t.string  :name,        :null => false
       t.text    :description, :null => false

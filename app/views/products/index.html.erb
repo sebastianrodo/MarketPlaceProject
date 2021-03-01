@@ -24,6 +24,7 @@
         </div>
       <%end%>
     </div>
+    <%= link_to "Cerrar session", destroy_user_session_path, method: :delete %>
     <br><%=  link_to 'Create Product', new_product_path, class: 'btn btn-primary col' %>
   </div>
 </div>
