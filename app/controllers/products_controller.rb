@@ -17,12 +17,15 @@ class ProductsController < ApplicationController
   def create
     @product = current_user.products.new(product_params)
     if @product.save
-
-      flash[:success] = "Product successfully created"
-      redirect_to products_url
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: 'Product was successfully saved.' }
+        format.json { head :no_content }
+      end
     else
-      flash[:error] = "Something went wrong"
-      render :new
+      respond_to do |format|
+        flash.now[:alert] = 'You have to complete all of inputs.'
+        format.html { render :new}
+      end
     end
   end
 
@@ -36,31 +39,28 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if valid_product_owner!
-      @product.update(product_params)
-      #NotifierMailer.with(product: @product).email.deliver_later
-      respond_to do |format|
-        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to products_url,
-                      notice: 'It was not updated, you are not the owner of this product.' }
+    respond_to do |format|
+      if valid_product_owner! || current_user.admin_role?
+        if @product.update(product_params)
+          format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
+        else
+          format.html { render :edit }
+        end
+      else
+        flash.now[:alert] = 'It was not updated, you are not the owner of this product.'
       end
     end
   end
 
   def archive
-    if valid_product_owner!
-      @product.archived!
-      respond_to do |format|
-        format.html { redirect_to products_url, notice: 'Product was successfully archived.' }
-        format.json { head :no_content }
-      end
-    else
-      respond_to do |format|
+    respond_to do |format|
+      if valid_product_owner! || current_user.admin_role?
+        @product.archived!
+          format.html { redirect_to products_url, notice: 'Product was successfully archived.' }
+        end
+      else
         format.html { redirect_to products_url,
-                      notice: 'It was not deleted, you are not the owner of this product.' }
+                      alert: 'It was not deleted, you are not the owner of this product.' }
       end
     end
   end
@@ -68,12 +68,12 @@ class ProductsController < ApplicationController
   def publish
     if valid_product_owner!
       @product.published!
+
       User.find_each do |user|
         NotifierMailer.email(user, @product).deliver_later
       end
       respond_to do |format|
         format.html { redirect_to my_products_url, notice: 'Product was successfully published.' }
-        format.json { head :no_content }
       end
     end
   end

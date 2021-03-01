@@ -43,7 +43,9 @@ gem "paperclip"
 #alertify
 gem 'alertifyjs-rails'
 #activeadmin
-gem 'activeadmin'
+gem 'rails_admin', '~> 2.0'
+#cancancan
+gem 'cancancan'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
