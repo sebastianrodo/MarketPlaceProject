@@ -10,12 +10,9 @@
           <th scope="col">CellPhone</th>
           <th scope="col">Address</th>
           <th scope="col">Show</th>
-          <!-- <th scope="col">Delete</th> -->
-          <!-- <th scope="col">Edit</th> -->
         </tr>
       </thead>
       <tbody>
-
           <% @users.each do |user| %>
             <tr class="table-light">
               <td><%= user.first_name %></td>
@@ -23,29 +20,7 @@
               <td><%= user.email %></td>
               <td><%= user.cellphone %></td>
               <td><%= user.address %></td>
-              <td>
-                <%= link_to '<button type="button"
-                            class="btn btn-success">View
-                                    </button>'.html_safe,
-                    user_path(user), id: "user_show" %>
-               </td>
-              <!-- <td>
-                <center>
-                  <%= link_to '<button type="button"
-                            class="btn btn-danger">Delete
-                                    </button>'.html_safe,
-                      user,
-                      method: :delete %>
-                </center>
-              </td> -->
-              <!-- <td>
-                <center>
-                  <%= link_to '<button type="button"
-                              class="btn btn-primary">Edit
-                                      </button>'.html_safe,
-                      "users/#{user.id}/edit" %>
-                </center>
-              </td> -->
+              <td><%= link_to 'Show', user_path(user), class: 'btn btn-success' %></td>
             </tr>
           <%end%>
       </tbody>
