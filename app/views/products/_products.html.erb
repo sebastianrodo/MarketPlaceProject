@@ -19,66 +19,48 @@
             <li class="list-group-item">Estate: <%= product.state %></li>
           <% end %>
         </ul><br>
-
-      </div>
-      <div class="card-footer">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm top-space-xs">
-              <center>
-                <%= link_to '<button type="button"
-                      class="btn btn-success">View
-                              </button>'.html_safe,
-                    product, id: "product_show" %>
-              </center>
+          </div>
+          <div class="card-footer">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm top-space-xs">
+                  <center>
+                    <%= link_to 'Show', product_path(product), class: 'btn btn-success' %>
+                  </center>
+                </div>
+                <% if user_signed_in? %>
+                  <% if id == "products"  %>
+                  <div class="col-sm top-space-xs">
+                    <center>
+                      <%= link_to 'Archive', archive_path(product), method: :put,
+                          type: 'button', class: 'btn btn-danger',
+                          data: {'js-hide-card' => true}, remote: true %>
+                    </center>
+                  </div>
+                  <% end %>
+                  <div class="col-sm top-space-xs">
+                    <center>
+                      <%= link_to 'Edit', edit_product_path(product),
+                          type: 'button', class: 'btn btn-primary' %>
+                    </center>
+                  </div>
+                  <% unless product.published? %>
+                  <div class="btn_publish col-sm top-space-xs">
+                    <center>
+                      <%= link_to 'Publish', publish_path(product), method: :put,
+                          type: 'button', class: 'btn btn-warning',
+                          data: {'js-hide-btn' => true}, remote: true %>
+                    </center>
+                  </div>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
-            <% if user_signed_in? %>
-              <% if id == "products"  %>
-              <div class="col-sm top-space-xs">
-                <center>
-                  <%= link_to '<button type="button"
-                        class="btn btn-danger">Delete
-                                </button>'.html_safe,
-                                "/products/#{product.id}/archive",
-                                method: :put,
-                                data: {'js-hide-card' => true},
-                                remote: true %>
-                </center>
-              </div>
-              <% end %>
-              <div class="col-sm top-space-xs">
-                <center>
-                  <%= link_to '<button type="button"
-                        class="btn btn-primary">Edit
-                                </button>'.html_safe,
-                      edit_product_path(product) %>
-                </center>
-              </div>
-              <% unless product.published? %>
-              <div class="btn_publish col-sm top-space-xs">
-                <center>
-                  <%= link_to '<button
-                                  type="button"
-                                  class="btn btn-warning"
-                                  id="hide">Publish
-                                </button>'.html_safe,
-                                "/products/#{product.id}/publish",
-                                method: :put,
-                                data: {'js-hide-btn' => true},
-                                remote: true %>
-                </center>
-              </div>
-              <% end %>
-            <% end %>
           </div>
         </div>
-      </div>
-    </div>
-  <% end %>
-</div><br>
-<% if user_signed_in? %>
-  <%=  link_to '<button type="button"
-                        class="btn col be-white color-secondary-bg shadow">Create Product
-                </button>'.html_safe,
-        new_product_url %>
-<% end %>
+      <% end %>
+    </div><br>
+    <% if user_signed_in? %>
+      <%=  link_to 'Create Product', new_product_path, class: 'btn col be-white color-secondary-bg shadow' %>
+    <% end %>
+    <%= will_paginate @products %>

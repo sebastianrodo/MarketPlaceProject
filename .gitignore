@@ -40,5 +40,10 @@
 yarn-debug.log*
 .yarn-integrity
 
+<<<<<<< HEAD
 # Ignore application configuration
 #/config/application.yml
+=======
+# Ignore images
+/public/system/images
+>>>>>>> Add_unit_test_for_models_and_controllers

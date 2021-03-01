@@ -48,7 +48,7 @@
             <li class="nav-item">
               <% if current_user.admin_role? %>
                 <%= link_to "Dashboard",
-                    "/admin",
+                    rails_admin_path,
                     class:"nav-item nav-link",
                     id: "dashboard" %>
               <% end %>
