@@ -26,23 +26,31 @@
             </li>
           <%end%>
           <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.first_name %>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <%= link_to "My Products",
+                  my_products_path,
+                  class:"dropdown-item" %>
+
+                  <%= link_to "Edit My Profile",
+                  "users/edit",
+                  class:"dropdown-item" %>
+                  <div class="dropdown-divider"></div>
+                  <%= link_to "Log out",
+                  destroy_user_session_path,
+                  method: :delete,
+                  class:"dropdown-item be-red" %>
+              </div>
+            </li>
             <li class="nav-item">
               <% if current_user.admin_role? %>
                 <%= link_to "Dashborad",
                     "/admin",
                     class:"nav-item nav-link" %>
               <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "My Products",
-                  my_products_path,
-                  class:"nav-item nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Log out",
-                  destroy_user_session_path,
-                  method: :delete,
-                  class:"nav-item nav-link" %>
             </li>
           <%end%>
         </ul>

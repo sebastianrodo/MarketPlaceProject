@@ -2,7 +2,7 @@
             height: 100%;
             margin-top: 3em;"
       class="container-fluid bottom-space background-white form-style">
-  <h1 class="text-center color-secondary">Sign up</h1>
+  <h1 class="text-center color-secondary top-space-xs">Sign up</h1>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -21,14 +21,12 @@
 
     <div class="field top-space">
       <%= f.label :cellphone %><br />
-      <%= f.text_field :cellphone,  class:"form-control", placeholder:"Cellphone",
-          required:"required" %>
+      <%= f.text_field :cellphone,  class:"form-control", placeholder:"Cellphone" %>
     </div>
 
     <div class="field top-space">
       <%= f.label :address %><br />
-      <%= f.text_field :address,  class:"form-control", placeholder:"Address",
-          required:"required" %>
+      <%= f.text_field :address,  class:"form-control", placeholder:"Address" %>
     </div>
 
     <div class="field top-space">
