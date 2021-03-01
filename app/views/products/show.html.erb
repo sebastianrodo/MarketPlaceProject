@@ -2,10 +2,9 @@
       style="width: 1200px;
             height: 100%;
             border-radius: 5px;">
-  <h1 class="top-space"><%= @product.name %></h1>
+  <h1 class="top-space be-yellow"><%= @product.name %></h1>
   <div class="row top-space bottom-space">
     <div class="col-8">
-
       <div  class="fotorama"
             data-transition="dissolve"
             data-loop="true"
@@ -26,7 +25,8 @@
       <h5><%= @product.quantity %></h5>
 
       <label class="top-space be-red">Description</label>
-      <h5><%= @product.description %></h5>
+      <h5 class="bottom-space"><%= @product.description %></h5>
+      <button type="button" class="btn btn-success">BUY NOW</button>
     </div>
   </div>
 </div>

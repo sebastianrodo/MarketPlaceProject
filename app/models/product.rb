@@ -11,4 +11,8 @@ class Product < ApplicationRecord
   def category=(value)
     @category = value
   end
+
+  def current
+    @category = value
+  end
 end

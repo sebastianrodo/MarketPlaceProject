@@ -15,7 +15,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def valid_user!
+  def valid_product_owner!
     @product.user_id === current_user.id
+  end
+
+  def valid_account_owner!
+    @user.id === current_user.id
   end
 end
