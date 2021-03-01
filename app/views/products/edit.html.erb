@@ -1,6 +1,9 @@
-<div class="top-space">
-  <div class="container">
-    <h1 class="text-center be-light-blue">CREATE PRODUCT</h1>
+<div class="top-space bottom-space">
+  <div class="container" style="
+              border: 3px solid #007bff;
+              border-radius: 7px;
+              box-shadow: 3px 5px 15px grey;">
+    <h1 class="text-center be-light-blue top-space-xs">EDIT PRODUCT</h1>
     <%= form_for(@product) do |product| %>
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -29,6 +32,6 @@
         </div>
       </div>
       <%= product.submit "Save", class:"btn btn-primary"%>
-    <%end%>
+    <%end%><br>
   </div>
 </div>

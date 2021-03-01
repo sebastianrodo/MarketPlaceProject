@@ -1,6 +1,6 @@
-<div class="top-space">
-  <div class="container">
-    <h1 class="text-center be-light-blue">CREATE PRODUCT</h1>
+<div class="top-space bottom-space">
+  <div class="container background-white form-style">
+    <h1 class="text-center color-secondary top-space-xs">CREATE PRODUCT</h1>
     <%= form_for(@product) do |product| %>
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -27,9 +27,9 @@
               <%= check_box_tag "category", category.id %> <%= category.name %>
             <%end%>
         </div>
+        <%= product.submit "Save", class:"btn color-secondary-bg be-white"%>
       </div>
-      <%= product.submit "Save", class:"btn btn-primary"%>
-    <%end%>
+    <%end%><br>
   </div>
 </div>
 

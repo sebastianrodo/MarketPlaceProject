@@ -20,6 +20,10 @@
   padding-top: 1em !important;
 }
 
+.top-space-xs{
+  padding-top: 0.5em !important;
+}
+
 .bottom-space{
   padding-bottom: 1em !important;
 }
@@ -34,4 +38,38 @@
 
 .be-red{
   color: red;
+}
+
+.be-white{
+  color: white;
+}
+
+.background-white{
+  background-color: white;
+}
+
+.form-style{
+  border: 3px solid #6572b8;
+  border-radius: 7px;
+  box-shadow: 3px 5px 15px grey;
+}
+
+.color-secondary-bg{
+  background-color: #6572b8;
+}
+
+.color-secondary{
+  color: #6572b8;
+}
+
+.color-primary-bg{
+  background-color: #8c99e0;
+}
+
+.color-primary{
+  color: #8c99e0;
+}
+
+.shadow{
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
 }

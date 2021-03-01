@@ -1,11 +1,8 @@
 <div style="width: 45%;
-            height: 100%;
-            border: 3px solid #007bff;
-            border-radius: 7px;
-            box-shadow: 3px 5px 15px grey;"
-      class="container-fluid">
+            height: 100%;"
+      class="container-fluid form-style background-white">
   <div class="top-space bottom-space">
-    <h1 class="text-center">LOG IN</h1>
+    <h1 class="text-center color-secondary">Log in</h1>
     <div >
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field">
@@ -26,7 +23,7 @@
         <% end %>
 
         <div class="actions top-space bottom-space">
-          <%= f.submit "Log in", class:"btn btn-primary col" %>
+          <%= f.submit "Log in", class:"btn col be-white color-secondary-bg" %>
         </div>
       <% end %>
     </div>

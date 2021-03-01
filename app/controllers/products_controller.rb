@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :fetch_product, except: [:index, :new, :create]
 
   def index
-    @products = Product.all
+    @products = Product.all.paginate(page: params[:page], per_page: 3)
   end
 
   def new
@@ -37,6 +37,7 @@ class ProductsController < ApplicationController
       redirect_to products_url
     end
   end
+
   private
 
   def product_params
