@@ -1,5 +1,10 @@
-<div class="container">
-  <h2 class="be-light-blue">Sign up</h2>
+<div style="width: 45%;
+            height: 100%;
+            border: 3px solid #007bff;
+            border-radius: 7px;
+            box-shadow: 3px 5px 15px grey;"
+      class="container-fluid bottom-space">
+  <h1 class="top-space text-center">Sign up</h1>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -53,3 +58,4 @@
     <%= render "devise/shared/links" %>
   </div>
 </div>
+<div class="bottom-space"></div>
