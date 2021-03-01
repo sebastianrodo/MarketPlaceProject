@@ -14,47 +14,35 @@
               <li class="list-group-item">Description: <%= product.description %></li>
               <li class="list-group-item">Quantity: <%= product.quantity %></li>
               <li class="list-group-item">Price: $<%= product.price %></li>
-            </ul><br>
-
+            </ul>
           </div>
           <div class="card-footer">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-sm">
                   <center>
-                    <%= link_to '<button type="button"
-                          class="btn btn-success">View
-                                  </button>'.html_safe,
-                        "products/#{product.id}" %>
+                    <%= link_to 'Show', product_path(product), class: 'btn btn-success' %>
                   </center>
                 </div>
                 <div class="col-sm">
                   <center>
-                    <%= link_to '<button type="button"
-                          class="btn btn-danger">Delete
-                                  </button>'.html_safe,
-                                  "/products/#{product.id}/archive",
-                                  method: :put%>
+                    <%= button_to 'Delete', product, method: :delete,
+                        type: 'button', class: 'btn btn-danger' %>
                   </center>
                 </div>
-                  <div class="col-sm">
-                    <center>
-                      <%= link_to '<button type="button"
-                            class="btn btn-primary">Edit
-                                    </button>'.html_safe,
-                          "products/#{product.id}/edit" %>
-                    </center>
-                  </div>
+                <div class="col-sm">
+                  <center>
+                    <%= link_to 'Edit', edit_product_path(product),
+                        type: 'button', class: 'btn btn-primary' %>
+                  </center>
+                </div>
               </div>
             </div>
           </div>
         </div>
       <%end%>
     </div><br>
-    <%=  link_to '<button type="button"
-                          class="btn col be-white color-secondary-bg shadow">Create Product
-                  </button>'.html_safe,
-          "products/new" %>
+    <%=  link_to 'Create Product', new_product_path, class: 'btn btn-primary col' %>
     <%= will_paginate @products %>
   </div>
 </div><br>

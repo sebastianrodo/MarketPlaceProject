@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_01_12_150032) do
     t.integer "price", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.bigint "category_id", null: false
     t.integer "state", default: 0
     t.index ["category_id"], name: "index_products_on_category_id"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_01_12_150032) do
     t.string "last_name", null: false
     t.string "email", null: false
     t.bigint "cellphone"
-    t.string "address", default: ""
+    t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "encrypted_password", default: "", null: false
