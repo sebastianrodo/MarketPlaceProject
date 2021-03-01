@@ -1,0 +1,34 @@
+<div class="top-space">
+  <div class="container">
+    <h1 class="text-center be-light-blue">CREATE PRODUCT</h1>
+    <%= form_for(@product) do |product| %>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputProductName">Product Name</label>
+          <%= product.text_field :name, class:"form-control", placeholder:"Product Name" %>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputProductDescription">Product description</label>
+          <%= product.text_field :description, class:"form-control", placeholder:"Product description" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputProductQuantity">Product quantity</label>
+          <%= product.text_field :quantity, class:"form-control", placeholder:"Product quantity" %>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputProductPrice">Product price</label>
+          <%= product.text_field :price, class:"form-control", placeholder:"Product price" %>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputProductCategories">Categories</label>
+            <% Category.all.each do |category| %>
+              <%= check_box_tag "category", category.id %> <%= category.name %>
+            <%end%>
+        </div>
+      </div>
+      <%= product.submit "Save", class:"btn btn-primary"%>
+    <%end%>
+  </div>
+</div>
