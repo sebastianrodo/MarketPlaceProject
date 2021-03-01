@@ -13,6 +13,10 @@
               <li class="list-group-item">Quantity: <%= product.quantity %></li>
               <li class="list-group-item">Price: $<%= product.price %></li>
             </ul>
+            <center>
+              <%= button_to 'Delete', product, method: :delete,
+                  type: 'button', class: 'btn btn-danger' %>
+            </center>
           </div>
           <div class="card-footer">
             <small class="text-muted">-------</small>
