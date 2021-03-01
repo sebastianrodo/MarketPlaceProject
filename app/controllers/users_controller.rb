@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, except: [:index, :new, :create]
+  before_action :fetch_user, except: [:index, :new, :create]
 
   def index
     @users = User.all
@@ -20,12 +20,11 @@ class UsersController < ApplicationController
       redirect_to users_url
     else
       flash[:error] = "Something went wrong"
-      render 'new'
+      render :new
     end
   end
 
-  def show
-  end
+  def show; end
 
   def destroy
     if valid_account_owner!
@@ -49,13 +48,11 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to users_url, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
       end
     else
       respond_to do |format|
         format.html { redirect_to users_url,
                       notice: 'It was not updated, you are not this user.' }
-        #format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,7 +63,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :email, :cellphone, :address)
   end
 
-  def set_user
+  def fetch_user
     @user = User.find(params[:id])
   end
 end

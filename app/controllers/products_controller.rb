@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_product, except: [:index, :new, :create, :my_products]
+  before_action :fetch_product, except: [:index, :new, :create, :my_products]
 
   def index
     @products = Product.all.paginate(page: params[:page], per_page: 3).published
@@ -12,19 +12,17 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @product = current_user.products.new(product_params)
-    #@product.to_yml
     if @product.save
 
       flash[:success] = "Product successfully created"
       redirect_to products_url
     else
       flash[:error] = "Something went wrong"
-      render 'new'
+      render :new
     end
   end
 
@@ -43,13 +41,11 @@ class ProductsController < ApplicationController
       #NotifierMailer.with(product: @product).email.deliver_later
       respond_to do |format|
         format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
-        format.json { head :no_content }
       end
     else
       respond_to do |format|
         format.html { redirect_to products_url,
                       notice: 'It was not updated, you are not the owner of this product.' }
-        #format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -98,7 +94,7 @@ class ProductsController < ApplicationController
                                     images_attributes: [:id, :image, :_destroy])
   end
 
-  def set_product
+  def fetch_product
     @product = Product.find(params[:id])
   end
 end
