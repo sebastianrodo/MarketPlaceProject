@@ -4,33 +4,33 @@
       class="container-fluid bottom-space background-white form-style">
   <h1 class="text-center color-secondary top-space-xs">Sign up</h1>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, id: "create_user_form" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field top-space">
-      <%= f.label :first_name %><br />
+      <%= f.label :first_name %><br/>
       <%= f.text_field :first_name, class:"form-control", placeholder:"First Name",
           required:"required" %>
     </div>
 
     <div class="field top-space">
-      <%= f.label :last_name %><br />
+      <%= f.label :last_name %><br/>
       <%= f.text_field :last_name,  class:"form-control", placeholder:"Last Name",
                                     required:"required" %>
     </div>
 
     <div class="field top-space">
-      <%= f.label :cellphone %><br />
+      <%= f.label :cellphone %><br/>
       <%= f.text_field :cellphone,  class:"form-control", placeholder:"Cellphone" %>
     </div>
 
     <div class="field top-space">
-      <%= f.label :address %><br />
+      <%= f.label :address %><br/>
       <%= f.text_field :address,  class:"form-control", placeholder:"Address" %>
     </div>
 
     <div class="field top-space">
-      <%= f.label :email %><br />
+      <%= f.label :email %><br/>
       <%= f.email_field :email, class:"form-control", autofocus: true, autocomplete: "email",
           placeholder:"Email", required:"required"  %>
     </div>
@@ -42,12 +42,6 @@
       <% end %><br />
       <%= f.password_field :password, class:"form-control", autocomplete: "new-password",
           placeholder:"Password", required:"required"  %>
-    </div>
-
-    <div class="field top-space">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, class:"form-control", autocomplete: "new-password",
-          placeholder:"Password Confirmation", required:"required"  %>
     </div>
 
     <div class="actions top-space">

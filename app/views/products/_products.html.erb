@@ -1,25 +1,24 @@
 <h1 class="be-white"><%= name %></h1><br>
-    <div  class="card-deck"
-          data-aos="zoom-out"
-          data-aos-duration="1200">
-      <% @products.each do |product| %>
-        <div class="card shadow">
-          <% @img.find do |img| %>
-            <% if img.product_id == product.id %>
-              <%= image_tag img.image.url(), class:"card-img-top", alt:"Card image cap" %>
-            <% end %>
+<div  class="card-deck"
+      data-aos="zoom-out"
+      data-aos-duration="1200">
+  <% @products.each do |product| %>
+    <div class="card shadow">
+      <% @img.find do |img| %>
+        <% if img.product_id == product.id %>
+          <%= image_tag img.image.url(), class:"card-img-top", alt:"Card image cap" %>
+        <% end %>
+      <% end %>
+      <div class="card-body">
+        <h3 class="card-title be-red"><%= product.name %></h3>
+        <ul class="list-group list-group-fluid">
+          <li class="list-group-item">Description: <%= product.description %></li>
+          <li class="list-group-item">Quantity: <%= product.quantity %></li>
+          <li class="list-group-item">Price: $<%= product.price %></li>
+          <% if id == "my_products"  %>
+            <li class="list-group-item">Estate: <%= product.state %></li>
           <% end %>
-          <div class="card-body">
-            <h3 class="card-title be-red"><%= product.name %></h3>
-            <ul class="list-group list-group-fluid">
-              <li class="list-group-item">Description: <%= product.description %></li>
-              <li class="list-group-item">Quantity: <%= product.quantity %></li>
-              <li class="list-group-item">Price: $<%= product.price %></li>
-              <% if id == "my_products"  %>
-                <li class="list-group-item">Estate: <%= product.state %></li>
-              <% end %>
-            </ul><br>
-
+        </ul><br>
           </div>
           <div class="card-footer">
             <div class="container-fluid">

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# ApplicationController
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -16,10 +19,29 @@ class ApplicationController < ActionController::Base
   end
 
   def valid_product_owner!
-    @product.user_id === current_user.id
+    return true if (@product.user_id == current_user.id) || current_user.admin_role?
+
+    respond_to do |format|
+      format.html do
+        redirect_to products_url,
+                    alert: 'You cannot do this action, you are not the owner of this product.'
+      end
+      format.json { head :no_content }
+    end
+    false
   end
 
   def valid_account_owner!
-    @user.id === current_user.id
+    return true if (@user.id == current_user.id) || current_user.admin_role?
+
+    flash.now[:alert] = 'You cannot do this action, this account does not belong to you.'
+    respond_to do |format|
+      format.html do
+        redirect_to users_url,
+                    alert: 'You cannot do this action, this account does not belong to you.'
+      end
+      format.json { head :no_content }
+    end
+    false
   end
 end

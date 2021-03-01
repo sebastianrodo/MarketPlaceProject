@@ -36,8 +36,8 @@
                   class:"dropdown-item" %>
 
                   <%= link_to "Edit My Profile",
-                  "users/edit",
-                  class:"dropdown-item" %>
+                  edit_user_registration_path,
+                  class:"dropdown-item", id: "edit_profile" %>
                   <div class="dropdown-divider"></div>
                   <%= link_to "Log out",
                   destroy_user_session_path,
@@ -47,9 +47,10 @@
             </li>
             <li class="nav-item">
               <% if current_user.admin_role? %>
-                <%= link_to "Dashborad",
+                <%= link_to "Dashboard",
                     "/admin",
-                    class:"nav-item nav-link" %>
+                    class:"nav-item nav-link",
+                    id: "dashboard" %>
               <% end %>
             </li>
           <%end%>

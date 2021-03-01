@@ -1,27 +1,29 @@
 <h1 class="text-center color-secondary top-space-xs"><%= name %> PRODUCT</h1>
-<%= form_with(model: @product, local: true) do |form| %>
+<%= form_with(model: @product, local: true, html: { id: "edit_product_form" }) do |form| %>
   <div class="form-group col-md">
-    <label for="inputProductName"><b>Product Name</b></label>
-    <%= product.text_field :name, class:"form-control", placeholder:"Product Name",
-        required:"required" %>
-    <label for="inputProductDescription" class="top-space"><b>Product description</b></label>
-    <%= product.text_area :description, class:"form-control", placeholder:"Product description",
-        required:"required" %>
+    <%= form.label :name %><br/>
+    <%= form.text_field :name, class:"form-control", placeholder:"Product Name", required:"required" %>
+
+    <%= form.label :description %><br/>
+    <%= form.text_area :description,  class:"form-control",
+                                      placeholder:"Product description",
+                                      required:"required"%>
 
     <div class="form-row top-space">
       <div class="form-group col-md-6">
-        <label for="inputProductQuantity"><b>Product quantity</b></label>
-        <%= product.text_field :quantity, class:"form-control", placeholder:"Product quantity",
-            required:"required" %>
+        <%= form.label :quantity %><br/>
+        <%= form.text_field :quantity,  class:"form-control",
+                                        placeholder:"Product quantity",
+                                        required:"required"%>
       </div>
 
       <div class="form-group col-md-6">
-        <label for="inputProductPrice"><b>Product price</b></label>
+        <%= form.label :price %><br/>
         <%= form.text_field :price, class:"form-control", placeholder:"Product price", required:"required" %>
       </div>
 
       <div class="form-group col-md-6">
-        <label for="inputProductPrice"><b>Categories</b></label>
+        <%= form.label :category %><br/>
         <% category_array = Category.all.map { |category| [category.name, category.id] } %>
         <%= form.select(:category_id, options_for_select(category_array),
                             { },
@@ -29,7 +31,7 @@
       </div>
 
       <div class="form-group col-md-6">
-        <label for="inputProductCategory"><b>Upload the product images</b></label>
+        <%= form.label :image %><br/>
           <%= form.fields_for :images do |image| %>
             <%= render 'image_fields', f: image %>
           <% end %>

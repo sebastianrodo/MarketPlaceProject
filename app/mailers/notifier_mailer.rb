@@ -1,5 +1,7 @@
-class NotifierMailer < ApplicationMailer
+# frozen_string_literal: true
 
+# class notifier mailer
+class NotifierMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -9,6 +11,6 @@ class NotifierMailer < ApplicationMailer
     @user = user
     @product = product
 
-    mail(to: @user.email, subject: "A new product has been published")
+    mail(to: @user.email, subject: 'A new product has been published')
   end
 end

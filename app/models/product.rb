@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Class product model
 class Product < ApplicationRecord
   belongs_to :user, class_name: 'User', foreign_key: 'user_id'
   belongs_to :category, class_name: 'Category', foreign_key: 'category_id'
@@ -7,22 +10,14 @@ class Product < ApplicationRecord
   validates :description, presence: true
   validates :quantity,  presence: true,
                         numericality: { only_integer: true,
-                                        message: "should be numeric" }
+                                        message: 'should be numeric' }
   validates :price, presence: true,
                     numericality: { only_integer: true,
-                                    message: "should be numeric" }
+                                    message: 'should be numeric' }
 
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
 
-  scope :published, -> { where(state: "published") }
+  scope :published, -> { where(state: 'published') }
 
-  enum state: [:published, :archived, :unpublished]
-
-  def category=(value)
-    @category = value
-  end
-
-  def current
-    @category = value
-  end
+  enum state: %i[published archived unpublished]
 end

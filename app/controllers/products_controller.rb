@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# products controller
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :fetch_product, except: [:index, :new, :create, :my_products]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :fetch_product, except: %i[index new create my_products]
+  before_action :valid_product_owner!, only: %i[update destroy]
 
   def index
     @products = Product.all.paginate(page: params[:page], per_page: 3).published
@@ -16,15 +20,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.new(product_params)
-    if @product.save
-      respond_to do |format|
+
+    respond_to do |format|
+      if @product.save
         format.html { redirect_to products_url, notice: 'Product was successfully saved.' }
-        format.json { head :no_content }
-      end
-    else
-      respond_to do |format|
-        flash.now[:alert] = 'You have to complete all of inputs.'
-        format.html { render :new}
+      else
+        format.html { render :new, alert: 'You have to complete all of inputs.' }
       end
     end
   end
@@ -35,46 +36,37 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
+
     redirect_to products_url
   end
 
   def update
     respond_to do |format|
-      if valid_product_owner! || current_user.admin_role?
-        if @product.update(product_params)
-          format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
-        else
-          format.html { render :edit }
-        end
+      if @product.update(product_params)
+        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
       else
-        flash.now[:alert] = 'It was not updated, you are not the owner of this product.'
+        format.html { render :edit }
       end
     end
   end
 
   def archive
+    @product.archived!
+
     respond_to do |format|
-      if valid_product_owner! || current_user.admin_role?
-        @product.archived!
-          format.html { redirect_to products_url, notice: 'Product was successfully archived.' }
-        end
-      else
-        format.html { redirect_to products_url,
-                      alert: 'It was not deleted, you are not the owner of this product.' }
-      end
+      format.html { redirect_to products_url, notice: 'Product was successfully archived.' }
     end
   end
 
   def publish
-    if valid_product_owner!
-      @product.published!
+    @product.published!
 
-      User.find_each do |user|
-        NotifierMailer.email(user, @product).deliver_later
-      end
-      respond_to do |format|
-        format.html { redirect_to my_products_url, notice: 'Product was successfully published.' }
-      end
+    User.find_each do |user|
+      NotifierMailer.email(user, @product).deliver_later
+    end
+
+    respond_to do |format|
+      format.html { redirect_to my_products_url, notice: 'Product was successfully published.' }
     end
   end
 
@@ -91,7 +83,7 @@ class ProductsController < ApplicationController
                                     :quantity,
                                     :price,
                                     :category_id,
-                                    images_attributes: [:id, :image, :_destroy])
+                                    images_attributes: %i[id image _destroy])
   end
 
   def fetch_product
