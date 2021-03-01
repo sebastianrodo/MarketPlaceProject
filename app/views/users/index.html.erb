@@ -23,7 +23,7 @@
               <td><%= user.email %></td>
               <td><%= user.cellphone %></td>
               <td><%= user.address %></td>
-              <td><%= button_tag 'Show', type: 'button', class: 'btn btn-success'%></td>
+              <td><%=  link_to 'Show', user_path(user), class: 'btn btn-success' %></td>
               <td><%= button_tag 'Delete', type: 'button', class: 'btn btn-danger'%></td>
             </tr>
           <%end%>
