@@ -51,13 +51,13 @@ class ProductsController < ApplicationController
   end
 
   def archive
-    @product.archived!
+    @product.archive!
   end
 
   def publish
-    @product.published!
+    @product.publish!
 
-    send_email(@product)
+    SendEmailService.send_email(@product)
   end
 
   def my_products

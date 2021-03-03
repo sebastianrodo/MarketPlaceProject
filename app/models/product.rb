@@ -19,5 +19,5 @@ class Product < ApplicationRecord
 
   scope :published, -> { where(state: 'published') }
 
-  enum state: %i[published archived unpublished]
+  include ProductStateMachine
 end

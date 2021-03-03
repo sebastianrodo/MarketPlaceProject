@@ -32,7 +32,7 @@
                   <% if id == "products"  %>
                   <div class="col-sm top-space-xs">
                     <center>
-                      <%= link_to 'Archive', archive_path(product), method: :put,
+                      <%= link_to 'Archive', archive_product_path(product), method: :put,
                           type: 'button', class: 'btn btn-danger',
                           data: {'js-hide-card' => true}, remote: true %>
                     </center>
@@ -47,7 +47,7 @@
                   <% unless product.published? %>
                   <div class="btn_publish col-sm top-space-xs">
                     <center>
-                      <%= link_to 'Publish', publish_path(product), method: :put,
+                      <%= link_to 'Publish', publish_product_path(product), method: :put,
                           type: 'button', class: 'btn btn-warning',
                           data: {'js-hide-btn' => true}, remote: true %>
                     </center>

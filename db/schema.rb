@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_164838) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.bigint "category_id", null: false
-    t.integer "state", default: 2
+    t.string "state"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_164838) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "images", "products", on_delete: :cascade
+  add_foreign_key "images", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users"
 end

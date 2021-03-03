@@ -13,7 +13,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :cellphone, uniqueness: true,
                         allow_blank: true,
-                        allow_nil: true,
                         format: { without: /\A[a-zA-Z]+\z/,
                                   message: 'only allows numbers' }
 
