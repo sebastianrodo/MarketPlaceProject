@@ -284,41 +284,4 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
   end
-
-  describe '#archive' do
-    subject { controller.archive }
-
-    let(:product) { create(:product) }
-
-    before do
-      controller.instance_variable_set(:@product, product)
-    end
-
-    it { expect { subject }.to change { assigns(:product).state }.from('unpublished').to('archived') }
-  end
-
-  describe '#publish' do
-    subject { controller.publish }
-
-    let(:product) { create(:product) }
-
-    before do
-      controller.instance_variable_set(:@product, product)
-    end
-
-    it { expect { subject }.to change { assigns(:product).state }.from('unpublished').to('published') }
-  end
-
-  describe '#my_products' do
-    subject { controller.my_products }
-
-    let(:product) { create(:product) }
-
-    before do
-      sign_in product.user
-      subject
-    end
-
-    it { expect(assigns(:products).size).to eq(1) }
-  end
 end

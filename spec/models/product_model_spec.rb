@@ -45,13 +45,6 @@ RSpec.describe Product, type: :model do
     }
   end
 
-  context 'with enum' do
-    it do
-      expect(product).to define_enum_for(:state)
-        .with_values(%i[published archived unpublished])
-    end
-  end
-
   context 'with accepts nested attributes' do
     it {
       expect(product).to accept_nested_attributes_for(:images)

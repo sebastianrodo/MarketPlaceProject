@@ -1,5 +1,31 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint           not null, primary key
+#  address                :string
+#  admin_role             :boolean          default(FALSE)
+#  cellphone              :string(15)
+#  email                  :string           not null
+#  encrypted_password     :string           default(""), not null
+#  first_name             :string           not null
+#  last_name              :string           not null
+#  provider               :string
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  uid                    :string
+#  user_role              :boolean          default(TRUE)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 # Class user model
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
@@ -13,6 +39,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :cellphone, uniqueness: true,
                         allow_blank: true,
+                        allow_nil: true,
                         format: { without: /\A[a-zA-Z]+\z/,
                                   message: 'only allows numbers' }
 

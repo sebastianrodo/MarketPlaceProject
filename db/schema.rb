@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_164838) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "email", null: false
-    t.bigint "cellphone"
+    t.string "cellphone", limit: 15
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

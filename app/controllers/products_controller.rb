@@ -4,7 +4,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :fetch_product, except: %i[index new create my_products]
-  before_action :valid_product_owner!, only: %i[update destroy publish archive]
+  before_action :valid_product_owner, only: %i[update destroy publish archive]
 
   def index
     @products = Product.all.paginate(page: params[:page], per_page: 3).published
@@ -48,21 +48,6 @@ class ProductsController < ApplicationController
         format.html { render :edit }
       end
     end
-  end
-
-  def archive
-    @product.archive!
-  end
-
-  def publish
-    @product.publish!
-
-    SendEmailService.send_email(@product)
-  end
-
-  def my_products
-    @products = current_user.products.paginate(page: params[:page], per_page: 3)
-    @img = Image.all
   end
 
   private

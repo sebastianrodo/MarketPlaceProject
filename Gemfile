@@ -47,8 +47,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 # devise_token_auth
 gem 'devise_token_auth'
-# pry
-gem 'pry', '~> 0.13.1'
 # figaro
 gem 'figaro'
 # rubocop
@@ -66,8 +64,11 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # spring gem
   gem 'spring'
+  # spring watcher listen gem
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # annotate gem
   gem 'annotate'
 end
 
@@ -75,17 +76,28 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
+  # data base cleaner gem
   gem 'database_cleaner-active_record'
+  #factory bot gem
   gem 'factory_bot_rails'
+  # faker gem
   gem 'faker'
+  # rails controller testing gem
   gem 'rails-controller-testing'
+  # rspec mocks gem
   gem 'rspec-mocks', '~> 3.4', '>= 3.4.1'
+  #rspec rails gem
   gem 'rspec-rails'
+  # rubocop rspec gem
   gem 'rubocop-rspec', require: false
+  # shoulda matchers gem
   gem 'shoulda-matchers'
+  # simplecov gem
   gem 'simplecov', require: false, group: :test
+  # webdrivers gem
   gem 'webdrivers'
+  # pry gem
+  gem 'pry', '~> 0.13.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

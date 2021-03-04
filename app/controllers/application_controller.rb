@@ -18,10 +18,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def valid_product_owner!
-    message = 'You cannot do this action, you are not the owner of this product.'
-
+  def valid_product_owner
     return true if (@product.user_id == current_user.id) || current_user.admin_role?
+
+    message = 'You cannot do this action, you are not the owner of this product.'
 
     respond_to do |format|
       format.html do
@@ -32,10 +32,10 @@ class ApplicationController < ActionController::Base
     false
   end
 
-  def valid_account_owner!
-    message = 'You cannot do this action, this account does not belong to you.'
-
+  def valid_account_owner
     return true if (@user.id == current_user.id) || current_user.admin_role?
+
+    message = 'You cannot do this action, this account does not belong to you.'
 
     respond_to do |format|
       format.html do
@@ -46,10 +46,10 @@ class ApplicationController < ActionController::Base
     false
   end
 
-  def valid_admin!
-    message = 'You cannot do this action, you are not ADMIN.'
-
+  def valid_admin
     return true if current_user.admin_role?
+
+    message = 'You cannot do this action, you are not ADMIN.'
 
     respond_to do |format|
       format.html do
