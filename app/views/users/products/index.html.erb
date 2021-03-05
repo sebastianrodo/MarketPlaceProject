@@ -1,5 +1,6 @@
 <div class="top-space">
   <div class="container">
-    <%= render "partials/products/products", name: "MY PRODUCTS", id: "my_products" %>
+    <%= render partial: "product", collection: @products %>
+    <%= render partial: "create_product_buttom" %>
   </div>
 </div><br>

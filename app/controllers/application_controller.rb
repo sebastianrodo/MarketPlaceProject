@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def valid_product_owner
-    return true if (@product.user_id == current_user.id) || current_user.admin_role?
+    return true if belongs_to_current_user(@product.user_id)
 
     message = 'You cannot do this action, you are not the owner of this product.'
 
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def valid_account_owner
-    return true if (@user.id == current_user.id) || current_user.admin_role?
+    return true if belongs_to_current_user(@user.id)
 
     message = 'You cannot do this action, this account does not belong to you.'
 
@@ -58,5 +58,11 @@ class ApplicationController < ActionController::Base
       end
     end
     false
+  end
+
+  private
+
+  def belongs_to_current_user(id)
+    id == current_user.id || current_user.admin_role?
   end
 end

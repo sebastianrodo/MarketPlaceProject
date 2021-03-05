@@ -26,6 +26,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 # Class product model
+require 'pry'
 class Product < ApplicationRecord
   include AASM
 
@@ -33,9 +34,10 @@ class Product < ApplicationRecord
   belongs_to :category, class_name: 'Category', foreign_key: 'category_id'
   has_many :images, dependent: :delete_all
 
-  aasm column: :state do
+  aasm column: :state, whiny_transitions: false do
     state :unpublished, initial: true
-    state :published, :archived
+    state :published, before_enter: :send_mail_to_users
+    state :archived
 
     event :publish do
       transitions from: [:archived, :unpublished], to: :published
@@ -48,6 +50,10 @@ class Product < ApplicationRecord
     event :archive do
       transitions from: [:published, :unpublished], to: :archived
     end
+  end
+
+  def send_mail_to_users
+    SendEmailService.send_email(self)
   end
 
   validates :name, presence: true

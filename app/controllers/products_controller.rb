@@ -8,7 +8,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all.paginate(page: params[:page], per_page: 3).published
-    @img = Image.all
   end
 
   def new

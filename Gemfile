@@ -55,8 +55,8 @@ gem 'rubocop', require: false
 gem 'aasm'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-
+  # pry gem
+  gem 'pry', '~> 0.13.1'
 end
 
 group :development do
@@ -70,6 +70,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # annotate gem
   gem 'annotate'
+  # after commit everywhere gem
+  gem 'after_commit_everywhere', '~> 1.0'
 end
 
 group :test do
@@ -96,8 +98,6 @@ group :test do
   gem 'simplecov', require: false, group: :test
   # webdrivers gem
   gem 'webdrivers'
-  # pry gem
-  gem 'pry', '~> 0.13.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

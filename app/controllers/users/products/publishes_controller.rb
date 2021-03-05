@@ -4,8 +4,6 @@ module Users
       def update
         @product = Product.find(params[:product_id])
         @product.publish!
-
-        SendEmailService.send_email(@product)
       end
     end
   end
