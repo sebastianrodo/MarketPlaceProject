@@ -18,30 +18,51 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def valid_product_owner!
-    return true if (@product.user_id == current_user.id) || current_user.admin_role?
+  def valid_product_owner
+    return true if belongs_to_current_user(@product.user_id)
+
+    message = 'You cannot do this action, you are not the owner of this product.'
 
     respond_to do |format|
       format.html do
         redirect_to products_url,
-                    alert: 'You cannot do this action, you are not the owner of this product.'
+                    alert: message
       end
-      format.json { head :no_content }
     end
     false
   end
 
-  def valid_account_owner!
-    return true if (@user.id == current_user.id) || current_user.admin_role?
+  def valid_account_owner
+    return true if belongs_to_current_user(@user.id)
 
-    flash.now[:alert] = 'You cannot do this action, this account does not belong to you.'
+    message = 'You cannot do this action, this account does not belong to you.'
+
     respond_to do |format|
       format.html do
         redirect_to users_url,
-                    alert: 'You cannot do this action, this account does not belong to you.'
+                    alert: message
       end
-      format.json { head :no_content }
     end
     false
+  end
+
+  def valid_admin
+    return true if current_user.admin_role?
+
+    message = 'You cannot do this action, you are not ADMIN.'
+
+    respond_to do |format|
+      format.html do
+        redirect_to users_url,
+                    alert: message
+      end
+    end
+    false
+  end
+
+  private
+
+  def belongs_to_current_user(id)
+    id == current_user.id || current_user.admin_role?
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAnUserAdmin < ActiveRecord::Migration[6.0]
   def change
     User.create! do |u|

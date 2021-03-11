@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -39,11 +41,11 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  #For mailing
-  config.action_mailer.default_url_options = { host: "localhost:3000" }
+  # For mailing
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
   # Raise an error on page load if there are pending migrations.
-  config.active_record.migration_error = :page_load
+  config.active_record.migration_error = false
 
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
@@ -63,16 +65,15 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  #Config send email
+  # Config send email
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'example.com',
-    user_name:            'sebastian.rodriguez@koombea.com',
-    password:             'rbmpghpxymkfzype',
-    authentication:       'plain',
-    enable_starttls_auto: true }
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'example.com',
+    user_name: 'sebastian.rodriguez@koombea.com',
+    password: 'rbmpghpxymkfzype',
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 end
-
-

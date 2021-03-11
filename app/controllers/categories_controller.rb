@@ -4,6 +4,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :fetch_category, only: %i[show edit update destroy]
+  before_action :valid_admin
 
   def index
     @categories = Category.all

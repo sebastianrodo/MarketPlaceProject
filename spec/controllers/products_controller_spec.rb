@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
@@ -63,7 +65,7 @@ RSpec.describe ProductsController, type: :controller do
       { name: 'PC MASTER RACE',
         description: '4gb RAM, 2TB SOLID DISK',
         quantity: 9,
-        price: 5000000,
+        price: 5_000_000,
         state: 0,
         user_id: user.id,
         category_id: category.id }
@@ -79,37 +81,37 @@ RSpec.describe ProductsController, type: :controller do
       end
 
       context 'with valid attributes' do
-        it "adds a product" do
-          expect {
+        it 'adds a product' do
+          expect do
             post :create, params: { product: product_params }
-          }.to change(Product, :count).by(1)
+          end.to change(Product, :count).by(1)
         end
       end
 
-      context "with invalid attributes" do
-        it "adds a product" do
-          expect {
-            post :create, params: {  product: invalid_product_params }
-          }.to_not change(Product, :count)
+      context 'with invalid attributes' do
+        it 'adds a product' do
+          expect do
+            post :create, params: { product: invalid_product_params }
+          end.not_to change(Product, :count)
         end
       end
     end
 
-    context "as a guest" do
-      it "returns a 302 response" do
-        post :create, params: { project: product_params }
+    context 'as a guest' do
+      it 'returns a 302 response' do
+        post :create, params: { product: product_params }
         expect(response).to have_http_status '302'
       end
 
-      it "redirects to the sign-in page" do
-        post :create, params: { project: product_params }
-        expect(response).to redirect_to "/users/sign_in"
+      it 'redirects to the sign-in page' do
+        post :create, params: { product: product_params }
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
   end
 
   describe 'GET #new' do
-    subject { get :new, params: { } }
+    subject { get :new, params: {} }
 
     context 'expect be successfully' do
       let(:user) { create(:user) }
@@ -119,7 +121,7 @@ RSpec.describe ProductsController, type: :controller do
         subject
       end
 
-      it { expect(assigns(:product)).to_not be_nil }
+      it { expect(assigns(:product)).not_to be_nil }
       it { expect(assigns(:product)).to be_a_new(Product) }
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
@@ -141,7 +143,7 @@ RSpec.describe ProductsController, type: :controller do
         sign_in product.user
       end
 
-      it { expect{ subject }.to change{ product.reload.name }.from('PC MASTER RACE').to('Laptop Gamer') }
+      it { expect { subject }.to change { product.reload.name }.from('PC MASTER RACE').to('Laptop Gamer') }
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
     end
@@ -158,7 +160,7 @@ RSpec.describe ProductsController, type: :controller do
         sign_in another_user
       end
 
-      it { expect{ subject }.to_not change{ product.reload.name } }
+      it { expect { subject }.not_to change { product.reload.name } }
     end
 
     context 'expect fail, invalid attributes' do
@@ -173,7 +175,7 @@ RSpec.describe ProductsController, type: :controller do
         sign_in product.user
       end
 
-      it { expect{ subject }.to_not change{ product.reload.name } }
+      it { expect { subject }.not_to change { product.reload.name } }
     end
 
     context 'expect to be fail, the product to update not exist' do
@@ -203,7 +205,7 @@ RSpec.describe ProductsController, type: :controller do
         sign_in admin
       end
 
-      it { expect{ subject }.to change{ product.reload.name }.from('PC MASTER RACE').to('Laptop Gamer') }
+      it { expect { subject }.to change { product.reload.name }.from('PC MASTER RACE').to('Laptop Gamer') }
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
     end
@@ -215,12 +217,12 @@ RSpec.describe ProductsController, type: :controller do
           product: { name: 'Laptop Gamer' } }
       end
 
-      it { expect{ subject }.to_not change{ product.reload.name } }
+      it { expect { subject }.not_to change { product.reload.name } }
 
-      it "redirects to the sign-in page" do
+      it 'redirects to the sign-in page' do
         subject
-        expect(response).to have_http_status "302"
-        expect(response).to redirect_to "/users/sign_in"
+        expect(response).to have_http_status '302'
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
   end
@@ -236,7 +238,7 @@ RSpec.describe ProductsController, type: :controller do
         sign_in product.user
       end
 
-      it { expect{ subject }.to change(Product, :count).by(-1) }
+      it { expect { subject }.to change(Product, :count).by(-1) }
     end
 
     context 'try to delete a product that not belongs to you' do
@@ -249,7 +251,7 @@ RSpec.describe ProductsController, type: :controller do
         product
       end
 
-       it { expect{ subject }.to_not change(Product, :count) }
+      it { expect { subject }.not_to change(Product, :count) }
     end
 
     context 'as admin, delete a user not belongs to you' do
@@ -262,7 +264,7 @@ RSpec.describe ProductsController, type: :controller do
         product
       end
 
-      it{ expect{ subject }.to change(Product, :count).by(-1) }
+      it { expect { subject }.to change(Product, :count).by(-1) }
     end
 
     context 'try to delete without sign in, as a guest' do
@@ -273,51 +275,13 @@ RSpec.describe ProductsController, type: :controller do
         product
       end
 
-      it { expect{ subject }.to_not change(Product, :count) }
+      it { expect { subject }.not_to change(Product, :count) }
 
-      it "redirects to the sign-in page" do
+      it 'redirects to the sign-in page' do
         subject
-        expect(response).to have_http_status "302"
-        expect(response).to redirect_to "/users/sign_in"
+        expect(response).to have_http_status '302'
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
-  end
-
-  describe '#archive' do
-    subject { controller.archive }
-
-    let(:product) { create(:product) }
-
-    before do
-      controller.instance_variable_set(:@product, product)
-    end
-
-    it { expect{ subject }.to change{ assigns(:product).state }.from('unpublished').to('archived') }
-  end
-
-  describe '#publish' do
-    subject { controller.publish }
-
-    let(:product) { create(:product) }
-
-    before do
-      controller.instance_variable_set(:@product, product)
-    end
-
-    it { expect{ subject }.to change{ assigns(:product).state }.from('unpublished').to('published') }
-  end
-
-  describe '#my_products' do
-    subject { controller.my_products }
-
-    let(:product) { create(:product) }
-
-    before do
-      sign_in product.user
-      subject
-      #controller.instance_variable_set(:@product, product)
-    end
-
-    it { expect(assigns(:products).size).to eq(1) }
   end
 end

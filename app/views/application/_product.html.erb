@@ -1,0 +1,48 @@
+<div  class="card-deck"
+      data-aos="zoom-out"
+      data-aos-duration="1200">
+    <div class="target card shadow">
+      <% product.images.find do |img| %>
+        <%= image_tag img.image.url(), class:"card-img-top", alt:"Card image cap" %>
+      <% end %>
+      <div class="card-body">
+        <h3 class="card-title be-red"><%= product.name %></h3>
+        <ul class="list-group list-group-fluid">
+          <li class="list-group-item">Description: <%= product.description %></li>
+          <li class="list-group-item">Quantity: <%= product.quantity %></li>
+          <li class="list-group-item">Price: $<%= product.price %></li>
+        </ul><br>
+      </div>
+      <div class="card-footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm top-space-xs">
+              <center>
+                <%= link_to 'Show', product_path(product), class: 'btn btn-success', id: 'product_show' %>
+              </center>
+            </div>
+            <% if user_signed_in? %>
+              <%= render partial: "archive", locals: {product: product } if current_page?(products_path) %>
+              <div class="col-sm top-space-xs">
+                <center>
+                  <%= link_to 'Edit', edit_product_path(product),
+                      type: 'button', class: 'btn btn-primary' %>
+                </center>
+              </div>
+              <% unless product.published? %>
+                <div class="btn_publish col-sm top-space-xs">
+                  <center>
+                    <%= link_to 'Publish', users_product_publishes_path(product.id), method: :put,
+                        type: 'button', class: 'btn btn-warning',
+                        data: {'js-hide-btn' => true}, remote: true %>
+                  </center>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div><br>
+<%= will_paginate @products %>

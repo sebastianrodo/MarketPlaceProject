@@ -4,11 +4,10 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :fetch_product, except: %i[index new create my_products]
-  before_action :valid_product_owner!, only: %i[update destroy]
+  before_action :valid_product_owner, only: %i[update destroy publish archive]
 
   def index
     @products = Product.all.paginate(page: params[:page], per_page: 3).published
-    @img = Image.all
   end
 
   def new
@@ -48,29 +47,6 @@ class ProductsController < ApplicationController
         format.html { render :edit }
       end
     end
-  end
-
-  def archive
-    @product.archived!
-
-    # flash[:notice] = 'Product was successfully archived.'
-    # redirect_to @product
-  end
-
-  def publish
-    @product.published!
-
-    User.find_each do |user|
-      NotifierMailer.email(user, @product).deliver_later
-    end
-    # respond_to do |format|
-    #   format.html { redirect_to my_products_url, notice: 'Product was successfully published.' }
-    # end
-  end
-
-  def my_products
-    @products = current_user.products.paginate(page: params[:page], per_page: 3)
-    @img = Image.all
   end
 
   private

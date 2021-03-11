@@ -4,7 +4,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
   before_action :fetch_user, except: %i[index new create]
-  before_action :valid_account_owner!, only: %i[update destroy]
+  before_action :valid_account_owner, only: %i[update destroy]
 
   def index
     @users = User.all
@@ -33,7 +33,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
-      format.json { head :no_content }
     end
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
@@ -8,7 +10,7 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #index' do
     subject { get :index }
 
-    context 'expect to be successfully, with an authenticated user' do
+    context 'with an authenticated user' do
       let(:user) { create(:user) }
 
       before do
@@ -22,7 +24,7 @@ RSpec.describe UsersController, type: :controller do
       it { expect(assigns(:users).size).to eq(4) }
     end
 
-    context 'expect to be successfully, with just the user signed in record created' do
+    context 'with just the user signed in record created' do
       let(:user) { create(:user) }
 
       before do
@@ -36,7 +38,7 @@ RSpec.describe UsersController, type: :controller do
       it { expect(assigns(:users).size).to eq(1) }
     end
 
-    context 'expect to be fail, as a guest' do
+    context 'as a guest' do
       before do
         FactoryBot.create_list(:user, 3)
         subject
@@ -45,8 +47,9 @@ RSpec.describe UsersController, type: :controller do
       it { expect(response).to have_http_status '302' }
       it { expect(assigns(:users)).to be_nil }
       it { is_expected.not_to render_template :index }
-      it "redirects to the sign-in page" do
-        expect(response).to redirect_to "/users/sign_in"
+
+      it 'redirects to the sign-in page' do
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
   end
@@ -54,7 +57,7 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #show' do
     subject { get :show, params: params }
 
-    context 'expect to be successfully, with an authenticated user' do
+    context 'with an authenticated user' do
       let(:user) { create(:user) }
       let(:params) { { id: user.id } }
 
@@ -62,12 +65,13 @@ RSpec.describe UsersController, type: :controller do
         sign_in user
         subject
       end
+
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
       it { is_expected.to render_template :show }
     end
 
-    context 'expect to be fail, as a guest' do
+    context 'as a guest' do
       let(:user) { create(:user) }
       let(:params) { { id: user.id } }
 
@@ -77,12 +81,13 @@ RSpec.describe UsersController, type: :controller do
 
       it { expect(response).to have_http_status '302' }
       it { is_expected.not_to render_template :show }
-      it "redirects to the sign-in page" do
-        expect(response).to redirect_to "/users/sign_in"
+
+      it 'redirects to the sign-in page' do
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
 
-    context 'expect to be fail, the user to show not exist' do
+    context 'user to show not exist' do
       let(:user) { create(:user, :with_specific_id) }
       let(:params) { { id: 2 } }
 
@@ -95,7 +100,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'GET #new' do
-    subject { get :new, params: { } }
+    subject { get :new, params: {} }
 
     context 'expect be successfully' do
       let(:user) { create(:user) }
@@ -105,7 +110,7 @@ RSpec.describe UsersController, type: :controller do
         subject
       end
 
-      it { expect(assigns(:user)).to_not be_nil }
+      it { expect(assigns(:user)).not_to be_nil }
       it { expect(assigns(:user)).to be_a_new(User) }
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
@@ -128,7 +133,7 @@ RSpec.describe UsersController, type: :controller do
         sign_in user
       end
 
-      it { expect{ subject }.to change{ user.reload.first_name }.from('Fake_name').to('Julio') }
+      it { expect { subject }.to change { user.reload.first_name }.from('Fake_name').to('Julio') }
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
     end
@@ -145,7 +150,7 @@ RSpec.describe UsersController, type: :controller do
         sign_in user
       end
 
-      it { expect{ subject }.to_not change{ user.reload.first_name } }
+      it { expect { subject }.not_to change { user.reload.first_name } }
     end
 
     context 'update another user that not is the current' do
@@ -162,7 +167,7 @@ RSpec.describe UsersController, type: :controller do
         sign_in user
       end
 
-      it { expect{ subject }.to_not change{ another_user.reload.first_name } }
+      it { expect { subject }.not_to change { another_user.reload.first_name } }
     end
 
     context 'expect to be fail, the user to update not exist' do
@@ -193,7 +198,7 @@ RSpec.describe UsersController, type: :controller do
         sign_in admin
       end
 
-      it { expect{ subject }.to change{ user.reload.first_name }.from('Fake_name').to('Juan') }
+      it { expect { subject }.to change { user.reload.first_name }.from('Fake_name').to('Juan') }
       it { expect(response).to be_successful }
       it { expect(response).to have_http_status '200' }
     end
@@ -206,12 +211,12 @@ RSpec.describe UsersController, type: :controller do
                   current_password: '12345678' } }
       end
 
-      it { expect{ subject }.to_not change{ user.reload.first_name } }
+      it { expect { subject }.not_to change { user.reload.first_name } }
 
-      it "redirects to the sign-in page" do
+      it 'redirects to the sign-in page' do
         subject
-        expect(response).to have_http_status "302"
-        expect(response).to redirect_to "/users/sign_in"
+        expect(response).to have_http_status '302'
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
   end
@@ -227,7 +232,7 @@ RSpec.describe UsersController, type: :controller do
         sign_in user
       end
 
-      it { expect{ subject }.to change(User, :count).by(-1) }
+      it { expect { subject }.to change(User, :count).by(-1) }
     end
 
     context 'try to delete another user that not belongs to them' do
@@ -240,20 +245,20 @@ RSpec.describe UsersController, type: :controller do
         user2
       end
 
-      it { expect{ subject }.to_not change(User, :count) }
+      it { expect { subject }.not_to change(User, :count) }
     end
 
     context 'as admin, delete another user' do
       let(:user) { create(:user) }
       let(:admin) { create(:user, :admin) }
-      let(:params) { { id: user.id }}
+      let(:params) { { id: user.id } }
 
       before do
         sign_in admin
         user
       end
 
-      it{ expect{ subject }.to change(User, :count).by(-1) }
+      it { expect { subject }.to change(User, :count).by(-1) }
     end
 
     context 'try to delete without sign in, as a guest' do
@@ -264,12 +269,12 @@ RSpec.describe UsersController, type: :controller do
         user
       end
 
-      it { expect{ subject }.to_not change(User, :count) }
+      it { expect { subject }.not_to change(User, :count) }
 
-      it "redirects to the sign-in page" do
+      it 'redirects to the sign-in page' do
         subject
-        expect(response).to have_http_status "302"
-        expect(response).to redirect_to "/users/sign_in"
+        expect(response).to have_http_status '302'
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
   end

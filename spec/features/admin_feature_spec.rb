@@ -1,6 +1,8 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.feature "Admin", :type => :feature do
+require 'rails_helper'
+
+RSpec.describe 'Admin', type: :feature do
   let!(:admin_user) { create(:user, :admin) }
 
   let!(:normal_user) { create(:user) }
@@ -10,8 +12,8 @@ RSpec.feature "Admin", :type => :feature do
   end
 
   context 'visit dashboard page' do
-    scenario 'should be successful' do
-      login_as(admin_user, :scope => :user)
+    it 'is successful' do
+      login_as(admin_user, scope: :user)
       visit(root_path)
 
       click_link('dashboard')
@@ -19,8 +21,8 @@ RSpec.feature "Admin", :type => :feature do
       expect(page).to have_current_path('/admin')
     end
 
-    scenario 'should be fail' do
-      login_as(normal_user, :scope => :user)
+    it 'is fail' do
+      login_as(normal_user, scope: :user)
       visit('/admin')
 
       expect(page).to have_current_path(root_path)

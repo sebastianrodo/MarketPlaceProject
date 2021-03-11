@@ -244,7 +244,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-   config.scoped_views = true
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -272,13 +272,11 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :google_oauth2, '741653950344-a89qqvi88ijig4elp6unptpl1na2hbe8.apps.googleusercontent.com',
-  '3PiBzhOJmdIjc5r3Zu7JT_cz', scope: 'userinfo.email, userinfo.profile'
+  config.omniauth :google_oauth2, ENV["GOOGLE_APP_ID"], ENV["GOOGLE_KEY"],
+                  scope: "userinfo.email, userinfo.profile"
 
-  config.omniauth :facebook, '232917618503286', '9d504fd80d181203757af0004a518ee8',
-                  callback_url: "https://agile-falls-26525.herokuapp.com/users/auth/facebook/callback"
-
-
+  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_KEY"],
+                  callback_url: ENV["CALLBACK_FACEBOOK"]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -301,7 +299,7 @@ Devise.setup do |config|
   #
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
-  #config.omniauth_path_prefix = '/users/auth'
+  # config.omniauth_path_prefix = '/users/auth'
 
   # ==> Turbolinks configuration
   # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
